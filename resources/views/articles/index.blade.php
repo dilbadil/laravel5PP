@@ -1,6 +1,10 @@
 @extends('app')
 
-@section('content')
+@section ('title')
+    @parent - All Artices
+@stop
+
+@section ('content')
 
 <ul class="posts">
     @foreach ($articles as $article)
