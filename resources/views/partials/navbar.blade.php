@@ -7,12 +7,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Laravel</a>
+            <a class="navbar-brand" href="#">MyJournal</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/articles">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/categories">Categories</a></li>
                 @if (Auth::check())
                     <li><a href="/articles/create">Create</a></li>
                 @endif

@@ -17,46 +17,19 @@ a {
 /*
  * HEADER
 */
-header {
-    background: #16a085;
-    overflow: hidden;
-}
-header h1 {
-    padding: 0 20px;
-    line-height: 7rem;
-    color: #ecf0f1;
-    float: left;
-    width: 20%;
-    text-transform: uppercase;
-    text-shadow: 0 1px 1px rgba(0,0,0,.3);
-}
-header nav {
-    float: right;
-    text-align: right;
-    width: 80%;
-}
-header nav ul {
-    list-style: none;
-    margin-top: 3rem;
-    margin-right: 2rem;
-}
-header nav ul li {
-    display: inline-block;
-}
-header nav ul li a {
-    text-decoration: none;
-    transition: all 0.32s ease;
-    color: #ecf0f1;
-    padding: 5px 7px;
-    position: relative;
-}
-header nav ul li a:hover {
-    background: #ecf0f1;
-    color: #16a085; 
-    border-radius: 30px;
-    top: -2px;
-}
+.navbar-default {
+    .navbar-brand {
+        color: #ecf0f1
+    }
 
+    .navbar-nav li a {
+        color: #ecf0f1
+    }
+
+    background-color: #16a085;
+    color: #ecf0f1;
+    padding: 25px 0;
+}
 /*
  * Content
 */

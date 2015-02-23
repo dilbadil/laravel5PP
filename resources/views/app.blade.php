@@ -21,7 +21,7 @@
 	<![endif]-->
 </head>
 <body>
-    @include ('partials.navbar');
+    @include ('partials.navbar')
 
     <div class="container">
         @include('partials.flash')
