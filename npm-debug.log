@@ -1,0 +1,116 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'gulp-phpunit' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose node symlink /usr/bin/node
+5 verbose cache add [ 'gulp-phpunit', null ]
+6 verbose cache add name=undefined spec="gulp-phpunit" args=["gulp-phpunit",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'gulp-phpunit',
+7 verbose parsed url   path: 'gulp-phpunit',
+7 verbose parsed url   href: 'gulp-phpunit' }
+8 silly lockFile becdb9a9-gulp-phpunit gulp-phpunit
+9 verbose lock gulp-phpunit /home/abd/.npm/becdb9a9-gulp-phpunit.lock
+10 silly lockFile becdb9a9-gulp-phpunit gulp-phpunit
+11 silly lockFile becdb9a9-gulp-phpunit gulp-phpunit
+12 verbose addNamed [ 'gulp-phpunit', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile a7ffbd7d-gulp-phpunit gulp-phpunit@
+15 verbose lock gulp-phpunit@ /home/abd/.npm/a7ffbd7d-gulp-phpunit.lock
+16 silly addNameRange { name: 'gulp-phpunit', range: '*', hasData: false }
+17 verbose request where is /gulp-phpunit
+18 verbose request registry https://registry.npmjs.org/
+19 verbose request id b1e335138af113e8
+20 verbose url raw /gulp-phpunit
+21 verbose url resolving [ 'https://registry.npmjs.org/', './gulp-phpunit' ]
+22 verbose url resolved https://registry.npmjs.org/gulp-phpunit
+23 verbose request where is https://registry.npmjs.org/gulp-phpunit
+24 info trying registry request attempt 1 at 07:43:43
+25 verbose etag "AT6PCVTBN1U6ER873BJAGZV2I"
+26 http GET https://registry.npmjs.org/gulp-phpunit
+27 http 304 https://registry.npmjs.org/gulp-phpunit
+28 silly registry.get cb [ 304,
+28 silly registry.get   { date: 'Thu, 19 Feb 2015 00:43:44 GMT',
+28 silly registry.get     server: 'Apache',
+28 silly registry.get     via: '1.1 varnish',
+28 silly registry.get     'last-modified': 'Thu, 19 Feb 2015 00:43:45 GMT',
+28 silly registry.get     'cache-control': 'max-age=60',
+28 silly registry.get     etag: '"AT6PCVTBN1U6ER873BJAGZV2I"',
+28 silly registry.get     age: '0',
+28 silly registry.get     'x-served-by': 'cache-sn87-SIN',
+28 silly registry.get     'x-cache': 'MISS',
+28 silly registry.get     'x-cache-hits': '0',
+28 silly registry.get     'x-timer': 'S1424306624.542169,VS0,VE1283',
+28 silly registry.get     vary: 'Accept',
+28 silly registry.get     'content-length': '0',
+28 silly registry.get     'keep-alive': 'timeout=10, max=50',
+28 silly registry.get     connection: 'Keep-Alive' } ]
+29 verbose etag https://registry.npmjs.org/gulp-phpunit from cache
+30 silly addNameRange number 2 { name: 'gulp-phpunit', range: '*', hasData: true }
+31 silly addNameRange versions [ 'gulp-phpunit',
+31 silly addNameRange   [ '0.0.1',
+31 silly addNameRange     '0.0.2',
+31 silly addNameRange     '0.0.3',
+31 silly addNameRange     '0.0.4',
+31 silly addNameRange     '0.1.0',
+31 silly addNameRange     '0.2.0',
+31 silly addNameRange     '0.2.1',
+31 silly addNameRange     '0.3.0',
+31 silly addNameRange     '0.4.0',
+31 silly addNameRange     '0.4.1',
+31 silly addNameRange     '0.4.2',
+31 silly addNameRange     '0.5.0',
+31 silly addNameRange     '0.5.1',
+31 silly addNameRange     '0.5.2',
+31 silly addNameRange     '0.5.3',
+31 silly addNameRange     '0.6.0',
+31 silly addNameRange     '0.6.1',
+31 silly addNameRange     '0.6.2',
+31 silly addNameRange     '0.6.3',
+31 silly addNameRange     '0.7.0' ] ]
+32 verbose addNamed [ 'gulp-phpunit', '0.7.0' ]
+33 verbose addNamed [ '0.7.0', '0.7.0' ]
+34 silly lockFile 98206a19-gulp-phpunit-0-7-0 gulp-phpunit@0.7.0
+35 verbose lock gulp-phpunit@0.7.0 /home/abd/.npm/98206a19-gulp-phpunit-0-7-0.lock
+36 silly lockFile db00a956-p-phpunit-gulp-phpunit-0-7-0-tgz https://registry.npmjs.org/gulp-phpunit/-/gulp-phpunit-0.7.0.tgz
+37 verbose lock https://registry.npmjs.org/gulp-phpunit/-/gulp-phpunit-0.7.0.tgz /home/abd/.npm/db00a956-p-phpunit-gulp-phpunit-0-7-0-tgz.lock
+38 verbose addRemoteTarball [ 'https://registry.npmjs.org/gulp-phpunit/-/gulp-phpunit-0.7.0.tgz',
+38 verbose addRemoteTarball   '104bcb90062ba90f15bd27aa09439fef9aa7363f' ]
+39 info retry fetch attempt 1 at 07:43:45
+40 verbose fetch to= /tmp/npm-9452-UzpLicV4/registry.npmjs.org/gulp-phpunit/-/gulp-phpunit-0.7.0.tgz
+41 http GET https://registry.npmjs.org/gulp-phpunit/-/gulp-phpunit-0.7.0.tgz
+42 http 200 https://registry.npmjs.org/gulp-phpunit/-/gulp-phpunit-0.7.0.tgz
+43 silly lockFile db00a956-p-phpunit-gulp-phpunit-0-7-0-tgz https://registry.npmjs.org/gulp-phpunit/-/gulp-phpunit-0.7.0.tgz
+44 silly lockFile db00a956-p-phpunit-gulp-phpunit-0-7-0-tgz https://registry.npmjs.org/gulp-phpunit/-/gulp-phpunit-0.7.0.tgz
+45 silly lockFile 98206a19-gulp-phpunit-0-7-0 gulp-phpunit@0.7.0
+46 silly lockFile 98206a19-gulp-phpunit-0-7-0 gulp-phpunit@0.7.0
+47 silly lockFile a7ffbd7d-gulp-phpunit gulp-phpunit@
+48 silly lockFile a7ffbd7d-gulp-phpunit gulp-phpunit@
+49 error Error: EACCES, mkdir '/home/abd/.npm/gulp-phpunit/0.7.0'
+49 error  { [Error: EACCES, mkdir '/home/abd/.npm/gulp-phpunit/0.7.0']
+49 error   errno: 3,
+49 error   code: 'EACCES',
+49 error   path: '/home/abd/.npm/gulp-phpunit/0.7.0' }
+50 error Please try running this command again as root/Administrator.
+51 error System Linux 3.13.0-30-generic
+52 error command "/usr/bin/node" "/usr/bin/npm" "install" "-g" "gulp-phpunit"
+53 error cwd /home/abd/Code/laravel5
+54 error node -v v0.10.32
+55 error npm -v 1.4.28
+56 error path /home/abd/.npm/gulp-phpunit/0.7.0
+57 error code EACCES
+58 error errno 3
+59 error stack Error: EACCES, mkdir '/home/abd/.npm/gulp-phpunit/0.7.0'
+60 verbose exit [ 3, true ]

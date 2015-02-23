@@ -1,0 +1,11 @@
+/vendor
+/node_modules
+.env
+composer.lock
+composer.phar
+.Thumbs.db
+/bower_components
+/.sass-cache
+.jpg
+.png
+.gif
