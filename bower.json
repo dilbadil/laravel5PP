@@ -23,6 +23,7 @@
     "bootstrap-sass-official": "~3.3.1",
     "lumx": "~0.2.50",
     "angular-material": "~0.7.1",
-    "fontawesome": "~4.3.0"
+    "fontawesome": "~4.3.0",
+    "bootstrap": "~3.3.2"
   }
 }

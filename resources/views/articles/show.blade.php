@@ -12,7 +12,6 @@
 
     <article>
         <div class="body">{{ $article->body }}</div>
-
     </article>
 
     @unless ($article->tags->isEmpty())

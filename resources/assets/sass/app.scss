@@ -1,3 +1,5 @@
+$greens: #16a085, rgb(0,150,136);
+
 *, *:before, *:after {
     margin: 0;
     padding: 0;
@@ -30,6 +32,7 @@ a {
     color: #ecf0f1;
     padding: 25px 0;
 }
+
 /*
  * Content
 */
@@ -76,9 +79,38 @@ article {
     }
 }
 
+.btn-primary {
+    background-color:#16a085;
+    border-color:#16a085;
+    &:hover {
+        background-color:#16a085;
+        border-color:#16a085;
+    }
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    background-color: #16a085;
+}
+
+.dropdown {
+    .dropdown-toggle {
+        background-color: #16a085;
+        &:hover {background-color: #16a085 !important;}
+    }
+    .dropdown-menu {
+        li {
+            a {
+                color: #16a085;
+            }
+        }
+    }
+}
 /*
  * Footer
 */
 footer {
     padding: 2rem;
 }
+
+@import 'pages/login';
+@import 'pages/register';

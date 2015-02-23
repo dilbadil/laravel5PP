@@ -35,21 +35,20 @@
         @yield('content')
     </div>
 
-	<!-- Scripts -->
-	<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
-	<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/twitter&#45;bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0&#45;beta.3/js/select2.min.js"></script> -->
+    @section('script')                                                                                                                                                                        
+        <!-- Scripts -->
+        <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+        <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/twitter&#45;bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
+        <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0&#45;beta.3/js/select2.min.js"></script> -->
 
-    <script src="{{ elixir('output/scripts.js') }}"></script>
-    
+        <script src="{{ elixir('output/scripts.js') }}"></script>
+    @show
+
     <footer>                                                                                                                                                                                  
         @section('footer')                                                                                                                                                                    
             <p>Powered by <a href="http://laravel.com" target="_blank">Laravel</a>. Copyright &copy; Pondok Programmer 2014</p>                                                                   
         @show                                                                                                                                                                                 
     </footer>                                                                                                                                                                                 
-
-    @section('script')                                                                                                                                                                        
-    @show
 
     <script>
         $('div.alert').not('.alert-important').delay(3000).slideUp(3000);

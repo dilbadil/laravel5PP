@@ -26,7 +26,7 @@ elixir(function(mix) {
     // setup scripts
     mix.scripts([
         '../../bower_components/jquery/dist/jquery.min.js',
-        '../../resources/libs/bootstrap.min.js',
+        '../../bower_components/bootstrap/dist/js/bootstrap.min.js',
         '../../bower_components/angular/angular.js',
         '../../resources/js/libs/select2.min.js',
         'main.js',
