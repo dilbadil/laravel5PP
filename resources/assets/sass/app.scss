@@ -1,4 +1,5 @@
 $greens: #16a085, rgb(0,150,136);
+$whites: #ecf0f1;
 
 *, *:before, *:after {
     margin: 0;
@@ -13,7 +14,7 @@ body {
 }
 
 a {
-    color: #16a085;
+    color: nth($greens, 1);
 }
 
 /*
@@ -21,15 +22,15 @@ a {
 */
 .navbar-default {
     .navbar-brand {
-        color: #ecf0f1
+        color: nth($whites, 1);
     }
 
     .navbar-nav li a {
-        color: #ecf0f1
+        color: nth($whites, 1);
     }
 
-    background-color: #16a085;
-    color: #ecf0f1;
+    background-color: nth($greens, 1);
+    color: nth($whites, 1);
     padding: 25px 0;
 }
 
@@ -80,27 +81,27 @@ article {
 }
 
 .btn-primary {
-    background-color:#16a085;
-    border-color:#16a085;
+    background-color: nth($greens, 1);
+    border-color: nth($greens, 1);
     &:hover {
-        background-color:#16a085;
-        border-color:#16a085;
+        background-color: nth($greens, 1);
+        border-color: nth($greens, 1);
     }
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
-    background-color: #16a085;
+    background-color: nth($greens, 1);
 }
 
 .dropdown {
     .dropdown-toggle {
-        background-color: #16a085;
-        &:hover {background-color: #16a085 !important;}
+        background-color: nth($greens, 1);
+        &:hover {background-color: nth($greens, 1) !important;}
     }
     .dropdown-menu {
         li {
             a {
-                color: #16a085;
+                color: nth($greens, 1);
             }
         }
     }
