@@ -1,0 +1,23 @@
+@import 'vendor/angular-animate.scss';
+@import '../../../bower_components/fontawesome/scss/font-awesome.scss';
+
+#header {
+    padding: 20px;
+    button {
+        padding: 5px 25px;
+    }
+}
+
+#subheader {
+    padding: 20px;
+    a {
+        text-decoration: none;
+        color: #FFF;
+        margin-right: 10px;
+    }
+}
+
+ul.tasklists {
+    list-style: none;
+    padding: 0;
+}
