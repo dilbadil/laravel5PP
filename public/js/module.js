@@ -1,1 +1,11 @@
-(function(){var n;n=function(){function n(){}return n}()}).call(this);
+(function() {
+  var Module;
+
+  Module = (function() {
+    function Module() {}
+
+    return Module;
+
+  })();
+
+}).call(this);

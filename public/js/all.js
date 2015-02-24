@@ -1,0 +1,1 @@
+!function(){"use strict";angular.module("PPApp",["ngMaterial","ngFx"]).value("baseUrl","http://localhost:8000/").config(["$mdThemingProvider",function(e){e.theme("default").primaryPalette("teal").accentPalette("cyan")}])}();
