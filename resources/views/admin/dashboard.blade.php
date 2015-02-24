@@ -15,7 +15,7 @@
         <ul class="tasklists">
             <li class="fx-fade-up fx-easing-bounce fx-speed-500" ng-repeat="task in TaskCtrl.tasks | filter:TaskCtrl.listFilter">
                 <md-checkbox ng-model="TaskCtrl.tasks[$index].completed">
-                    @{{ task.item }}
+                    {{ task.item }}
                 </md-checkbox>
                 <md-divider ng-if="!$last"></md-divider>
             </li>

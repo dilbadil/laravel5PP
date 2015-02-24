@@ -2,6 +2,7 @@
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Blade;
 
 class RouteServiceProvider extends ServiceProvider {
 
@@ -35,6 +36,8 @@ class RouteServiceProvider extends ServiceProvider {
         {
             return \App\Tag::where('name', $name)->firstOrFail();
         });
+
+        $this->setBladeContent();
 	}
 
 	/**
@@ -50,5 +53,16 @@ class RouteServiceProvider extends ServiceProvider {
 			require app_path('Http/routes.php');
 		});
 	}
+
+    /**
+     * Set blade content
+     *
+     * @return void
+     */
+    private function setBladeContent()
+    {
+        Blade::setContentTags('{!', '!}');
+        // Blade::setEscapedContentTags('<<<', '>>>');
+    }
 
 }

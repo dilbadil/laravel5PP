@@ -7,7 +7,7 @@
             @show
         </title>
         @section('css')
-            <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+            <link href="{! asset('css/main.css') !}" rel="stylesheet">
         @show
     </head>
     <body>
@@ -30,6 +30,6 @@
         </md-content>
     </body>
     @section('js')
-        <script src="{{ asset('js/admin.js') }}"></script>
+        <script src="{! asset('js/admin.js') !}"></script>
     @show
 </html>

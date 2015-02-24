@@ -5,9 +5,3 @@
 
     <p>Lorem ipsum dolor is amet....</p>
 @stop
-
-@section('footer')
-    <script>
-        // alert('helo');
-    </script>
-@stop

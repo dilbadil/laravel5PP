@@ -34,8 +34,6 @@ elixir(function(mix) {
         'main.js',
     ], 'public/output/scripts.js', 'public/js');
 
-
-
     mix.scripts([
         '../../bower_components/angular/angular.min.js',
         '../../bower_components/angular-aria/angular-aria.min.js',
@@ -47,6 +45,6 @@ elixir(function(mix) {
     ], 'public/js/admin.js');
 
     // version
-    mix.version(['public/output/styles.css', 'public/output/scripts.js']);
+    // mix.version(['public/output/styles.css', 'public/output/scripts.js']);
 
 });

@@ -11,7 +11,7 @@
     </title>
 
     @section ('css')
-        <link href="{{ elixir('output/styles.css') }}" rel="stylesheet">
+        <link href="{! asset('output/styles.css') !}" rel="stylesheet">
 
         <!-- Fonts -->
         <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -41,7 +41,7 @@
         <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/twitter&#45;bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
         <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0&#45;beta.3/js/select2.min.js"></script> -->
 
-        <script src="{{ elixir('output/scripts.js') }}"></script>
+        <script src="{! asset('output/scripts.js') !}"></script>
     @show
 
     <footer>                                                                                                                                                                                  
