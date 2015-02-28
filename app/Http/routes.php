@@ -3,7 +3,10 @@
 // Pages
 Route::get('/', 'ArticlesController@index');
 Route::get('home', 'ArticlesController@index');
-Route::get('about', 'PagesController@about');
+Route::get('about', [
+    'as' => 'about_path',
+    'uses' => 'PagesController@about',
+]);
 
 // Authentication
 Route::controllers([

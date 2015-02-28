@@ -9,7 +9,7 @@
 
     angular
         .module('PPApp', ['ngMaterial','ngFx'])
-        .value('baseUrl', 'http://laravel5.dev/')
+        .value('baseUrl', 'http://localhost/laravel5/public/')
         .config(['$mdThemingProvider', function($mdThemingProvider) {
           $mdThemingProvider.theme('default')
             .primaryPalette('teal')
