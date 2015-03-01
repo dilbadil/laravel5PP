@@ -1,0 +1,141 @@
+<?php namespace App\Http\Controllers;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
+
+use App\Commands\Users\ShowAllUser;
+use App\Commands\Users\ShowAnUser;
+use App\Commands\Users\StoreUser;
+use App\Commands\Users\UpdateAnUser;
+use App\Commands\Users\DeleteAnUser;
+
+use Illuminate\Http\Request;
+
+class UsersController extends Controller {
+
+    /**
+     * Instance of controller.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+	/**
+	 * Display a listing of the user.
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+        $result = $this->dispatch(new ShowAllUser);
+
+        return view('users.index', $result);
+	}
+
+	/**
+	 * Show the form for creating a new user.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		return view('users.create');
+	}
+
+	/**
+	 * Store a newly created user in storage.
+	 *
+	 * @param UserRequest $request
+	 * @return Response
+	 */
+	public function store(UserRequest $request)
+	{
+        $result = $this->dispatch(
+            new StoreUser($request->all())
+        );
+
+        return $this->redirectImportant($result['user']['email'] . ' has been created');
+	}
+
+	/**
+	 * Display the specified user.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+        $result = $this->dispatch(
+            new ShowAnUser($id) 
+        );
+
+		return view('users.show', $result);
+	}
+
+	/**
+	 * Show the form for editing the specified user.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+        $data = $this->dispatch(
+            new ShowAnUser($id)
+        );
+
+		return view('users.edit', $data);
+	}
+
+	/**
+	 * Update the specified user in storage.
+	 *
+	 * @param  int  $id
+	 * @param  UserRequest  $request
+	 * @return Response
+	 */
+	public function update(UserRequest $request, $id)
+	{
+        $data = array_add($request->all(), 'id', $id);
+
+        $result = $this->dispatch(
+            new UpdateAnUser($data) 
+        );
+
+        return $this->redirectImportant("User " . $result['old_user']['email'] . " has been updated to " . $result['user']['email']);
+	}
+
+	/**
+	 * Remove the specified user from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+        $result = $this->dispatch(
+            new DeleteAnUser($id) 
+        );
+
+        return $this->redirectImportant("User " . $result['user']['email'] . " has been deleted");
+	}
+
+    /**
+     * Redirect with important message.
+     *
+     * @param string $message
+     * @return void
+     */
+    protected function redirectImportant($message)
+    {
+        return redirect('users')->with([
+            'flash_message' => $message,
+            'flash_message_important' => true
+        ]);
+    }
+
+}
