@@ -14,7 +14,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="{! route('articles.index') !}">Home</a></li>
                 <li><a href="{! route('about_path') !}">About</a></li>
-                <li><a href="categories">Categories</a></li>
+                <li><a href="{! route('tags.index') !}">Categories</a></li>
                 @if (Auth::check())
                     <li><a href="{! route('articles.create') !}">Create</a></li>
                     <li><a href="{! route('users.index') !}">Users</a></li>
