@@ -11,7 +11,13 @@
     <hr/>
 
     <article>
-        <div class="body">{! $article->body !}</div>
+        <p>
+            Posted by <a href="{! route('users.show', [$article->user->id]) !}">{! $article->user->fullname !}</a>
+            on <b>{! $article->user->created_at->format('D, M Y H:i') !}</b>
+        </p>
+        <div class="body">
+            {! $article->body !}
+        </div>
     </article>
 
     @unless ($article->tags->isEmpty())

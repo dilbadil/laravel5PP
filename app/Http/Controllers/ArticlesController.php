@@ -34,7 +34,7 @@ class ArticlesController extends Controller {
 	 */
 	public function index()
 	{
-		$articles = Article::latest('published_at')->published()->get();
+		$articles = Article::with('user')->latest('published_at')->published()->get();
 
         return view('articles.index', compact('articles'));
 	}
@@ -100,7 +100,8 @@ class ArticlesController extends Controller {
 	{
         $article->update($request->all());
 
-        $this->syncTags($article, $request->input('tag_list'));
+        if ($request->has('tag_list'))
+            $this->syncTags($article, $request->input('tag_list'));
 
         return redirect('articles');
 	}
@@ -111,7 +112,7 @@ class ArticlesController extends Controller {
 	 * @param  Article  $article
 	 * @return void
 	 */
-	public function destroy($article)
+	public function destroy(Article $article)
 	{
 		$article->delete();
 
@@ -139,7 +140,8 @@ class ArticlesController extends Controller {
     {
         $article = $this->auth->user()->articles()->create($request->all());
 
-        $article->tags()->attach($request->input('tag_list'));
+        if ($request->has('tag_list'))
+            $article->tags()->attach($request->input('tag_list'));
         
         return $article;    
     }

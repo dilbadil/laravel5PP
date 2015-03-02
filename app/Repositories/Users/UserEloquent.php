@@ -31,6 +31,17 @@ class UserEloquent extends EloquentRepository implements UserRepositoryInterface
     }
 
     /**
+     * Get user by id + theri articles.
+     *
+     * @param int $id
+     * @return array
+     */
+    public function getById($id)
+    {
+        return $this->model->with('articles')->findOrFail($id)->toArray();
+    }
+
+    /**
      * Store user to database.
      *
      * @param array $user
@@ -39,6 +50,19 @@ class UserEloquent extends EloquentRepository implements UserRepositoryInterface
     public function store(array $user)
     {
         return $this->registrar->create($user)->toArray();
+    }
+
+    /**
+     * Update an user to database.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function update(array $data)
+    {
+        $data['password'] = bcrypt($data['password']);
+
+        return parent::update($data);
     }
 
 }

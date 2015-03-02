@@ -31,7 +31,7 @@ class RouteServiceProvider extends ServiceProvider {
         // bind article
         $router->bind('articles', function($id)
         {
-            return \App\Article::published()->findOrFail($id);
+            return \App\Article::with('user')->published()->findOrFail($id);
         });
 
         // bind tags
