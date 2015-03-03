@@ -147,6 +147,10 @@ return [
 		'App\Providers\RouteServiceProvider',
 		'App\Providers\ViewComposerServiceProvider',
 
+		/*
+		 * Package Service Providers...
+		 */
+        'Laracasts\Generators\GeneratorsServiceProvider',
 	],
 
 	/*
