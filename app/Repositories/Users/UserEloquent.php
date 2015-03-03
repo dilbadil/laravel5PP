@@ -60,7 +60,8 @@ class UserEloquent extends EloquentRepository implements UserRepositoryInterface
      */
     public function update(array $data)
     {
-        $data['password'] = bcrypt($data['password']);
+        if (isset($data['password']))
+            $data['password'] = bcrypt($data['password']);
 
         return parent::update($data);
     }

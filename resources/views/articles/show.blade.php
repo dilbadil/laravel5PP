@@ -32,10 +32,13 @@
     @endunless
 
     @if (Auth::check())
-        {!! Form::open(['method' => 'DELETE', 'route' => ['articles.destroy', $article->id]]) !!}
-            <button type="submit" class="btn btn-danger">Delete</button>
-        {!! Form::close() !!}
-        <a class="btn btn-primary" href="{! URL::route('articles.edit', $article->id) !}">Edit</a>
+        <hr/>
+        <div class="btn-group" role="group" aria-label="option-article">
+            {!! Form::open(['method' => 'DELETE', 'route' => ['articles.destroy', $article->id]]) !!}
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a class="btn btn-primary" href="{! URL::route('articles.edit', $article->id) !}">Edit</a>
+            {!! Form::close() !!}
+        </div>
     @endif
 
 @stop

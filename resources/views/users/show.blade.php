@@ -11,11 +11,12 @@
     </ul>
 
     @if (Auth::check())
-       <p> 
-            <a href="{! route('users.edit', [$user['id']]) !}">edit</a>
+        <hr/> 
+        <div class="form-group">          
             {!! Form::open(['route' => ['users.destroy', $user['id']], 'method' => 'DELETE', ]) !!}
-               <button class="btn btn-danger" type="submit">delete</button>
+                <a class="btn btn-primary" href="{! route('users.edit', [$user['id']]) !}">edit</a>
+                <button class="btn btn-danger" type="submit">delete</button>
             {!! Form::close() !!}
-       </p> 
+        </div>
     @endif
 @stop

@@ -3,6 +3,7 @@
 use App\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
+use App\Events\Registration\UserWasRegistered;
 
 class Registrar implements RegistrarContract {
 
@@ -29,11 +30,16 @@ class Registrar implements RegistrarContract {
 	 */
 	public function create(array $data)
 	{
-		return User::create([
+		$user = User::create([
 			'fullname' => $data['fullname'],
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
 		]);
+
+        // Fire an event that user was registered.
+        event(new UserWasRegistered($user));
+
+        return $user;
 	}
 
 }
