@@ -30,7 +30,7 @@ class ShowAnUserHandler {
 	 */
 	public function handle(ShowAnUser $command)
 	{
-		$user = $this->userRepo->getById($command->id);
+		$user = $this->userRepo->getByUsername($command->username);
 
         return compact('user');
 	}

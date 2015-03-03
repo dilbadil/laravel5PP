@@ -31,14 +31,30 @@ class UserEloquent extends EloquentRepository implements UserRepositoryInterface
     }
 
     /**
-     * Get user by id + theri articles.
+     * Get user by id + their articles.
      *
      * @param int $id
      * @return array
      */
     public function getById($id)
     {
-        return $this->model->with('articles')->findOrFail($id)->toArray();
+        return $this->model->with('articles')
+            ->findOrFail($id)
+            ->toArray();
+    }
+
+    /**
+     * Get user by id + their articles.
+     *
+     * @param string $username
+     * @return array
+     */
+    public function getByUsername($username)
+    {
+        return $this->model->with('articles')
+            ->where('username', $username)
+            ->firstOrFail()
+            ->toArray();
     }
 
     /**

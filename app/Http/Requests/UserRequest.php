@@ -1,6 +1,7 @@
 <?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\User;
 
 class UserRequest extends Request {
 
@@ -28,15 +29,12 @@ class UserRequest extends Request {
 	{
         $parameters = $this->route()->parameters();
 
-		$rules = [
-            'fullname' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed'
-		];
+        $rules = User::$rules;
 
         if (in_array($this->method, $this->updateMethods))
         {
             $rules['email'] = 'required|email|unique:users,email,' . $parameters['users'];
+            $rules['username'] = 'required|alpha_dash|unique:users,username,' . $parameters['users'];
         }
 
         return $rules;

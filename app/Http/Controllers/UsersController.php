@@ -64,13 +64,13 @@ class UsersController extends Controller {
 	/**
 	 * Display the specified user.
 	 *
-	 * @param  int  $id
+	 * @param  string  $username
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($username)
 	{
         $result = $this->dispatch(
-            new ShowAnUser($id) 
+            new ShowAnUser($username) 
         );
 
 		return view('users.show', $result);
@@ -79,13 +79,13 @@ class UsersController extends Controller {
 	/**
 	 * Show the form for editing the specified user.
 	 *
-	 * @param  int  $id
+	 * @param  string  $username
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($username)
 	{
         $data = $this->dispatch(
-            new ShowAnUser($id)
+            new ShowAnUser($username)
         );
 
 		return view('users.edit', $data);

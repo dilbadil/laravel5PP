@@ -14,7 +14,7 @@
             </h2>
             
             <p>
-                Posted by <a href="{! route('users.show', [$article->user->id]) !}">{! $article->user->fullname !}</a>
+                Posted by <a href="{! route('users.show', [$article->user->username]) !}">{! $article->user->fullname !}</a>
                 on {! $article->user->created_at->format('D, M Y H:i') !}
             </p>
             <p>{! $article->body !}</p>

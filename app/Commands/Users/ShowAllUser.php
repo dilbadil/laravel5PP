@@ -11,6 +11,7 @@ class ShowAllUser extends Command {
 	 */
 	public function __construct()
 	{
+        //
 	}
 
 }

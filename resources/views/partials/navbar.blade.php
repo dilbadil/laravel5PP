@@ -15,6 +15,7 @@
                 <li><a href="{! route('articles.index') !}">Home</a></li>
                 <li><a href="{! route('about_path') !}">About</a></li>
                 <li><a href="{! route('tags.index') !}">Categories</a></li>
+
                 @if (Auth::check())
                     <li><a href="{! route('articles.create') !}">Create</a></li>
                     <li><a href="{! route('users.index') !}">Users</a></li>
@@ -23,14 +24,17 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>{!! link_to_action('ArticlesController@show', $latest->title, [$latest->id]) !!}</li>
+
                 @if (Auth::guest())
-                    <li><a href="auth/login">Login</a></li>
-                    <li><a href="auth/register">Register</a></li>
+                    <li><a href="{! action('Auth\AuthController@getLogin') !}">Login</a></li>
+                    <li><a href="{! action('Auth\AuthController@getRegister') !}">Register</a></li>
                 @else
+
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{! Auth::user()->name !} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{! $user->username !} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="auth/logout">Logout</a></li>
+                            <li><a href="{! route('users.show', [$user->id]) !}">Profile</a></li>
+                            <li><a href="{! action('Auth\AuthController@getLogout') !}">Logout</a></li>
                         </ul>
                     </li>
                 @endif

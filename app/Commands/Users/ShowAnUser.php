@@ -5,9 +5,9 @@ use App\Commands\Command;
 class ShowAnUser extends Command {
 
     /**
-     * @var int
+     * @var string
      */
-    public $id;
+    public $username;
 
 	/**
 	 * Create a new command instance.
@@ -15,9 +15,9 @@ class ShowAnUser extends Command {
 	 * @param int $id
 	 * @return void
 	 */
-	public function __construct($id)
+	public function __construct($username)
 	{
-		$this->id = $id;
+		$this->username = $username;
 	}
 
 }

@@ -25,6 +25,14 @@ interface UserRepository {
     public function getById($id);
 
     /**
+     * Get by their username.
+     *
+     * @param string $username
+     * @return array
+     */
+    public function getByUsername($username);
+
+    /**
      * Update the user.
      *
      * @param array $user

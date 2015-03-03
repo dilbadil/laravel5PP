@@ -10,6 +10,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	use Authenticatable, CanResetPassword;
 
+    /**
+     * The basic rules of users.
+     *
+     * @var array
+     */
+    public static $rules = [
+
+        'fullname' => 'required|max:255',
+        'email' => 'required|email|max:255|unique:users',
+        'username' => 'required|alpha_dash|max:255|unique:users',
+        'password' => 'required|confirmed|min:6',
+    ];
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -22,7 +35,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['fullname', 'email', 'password'];
+	protected $fillable = ['fullname', 'email', 'username', 'password'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
