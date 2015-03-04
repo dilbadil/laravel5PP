@@ -3,6 +3,7 @@
 use Illuminate\Contracts\View\View;
 use Auth;
 use App\Article;
+use Illuminate\Auth\Guard;
 
 class NavigationComposer
 {
@@ -16,11 +17,13 @@ class NavigationComposer
      * Instance of Composer.
      *
      * @param Article $article
+     * @param Guard $auth
      * @return void
      */
-    public function __construct(Article $article)
+    public function __construct(Article $article, Guard $auth)
     {
         $this->article = $article;
+        $this->auth = $auth;
     }
     
     /**
@@ -33,7 +36,7 @@ class NavigationComposer
     {
         $view->with('latest', $this->article->latest()->first());
 
-        if (Auth::check())
+        if ($this->auth->check())
             $view->with('user', Auth::user());
     }
 }

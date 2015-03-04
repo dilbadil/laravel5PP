@@ -18,7 +18,6 @@ Route::controllers([
 Route::resource('articles', 'ArticlesController');
 
 // Tags
-// Route::get('tags/{tags}', 'TagsController@show');
 Route::resource('tags', 'TagsController');
 
 // Admin

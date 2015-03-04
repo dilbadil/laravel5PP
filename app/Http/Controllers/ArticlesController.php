@@ -8,6 +8,10 @@ use App\Article;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\HttpResponse;
 use App\Tag;
+use App\Contracts\ArticleRepository;
+
+use App\Commands\Articles\CreateArticle;
+use App\Commands\Articles\StoreArticle;
 
 class ArticlesController extends Controller {
 
@@ -17,14 +21,20 @@ class ArticlesController extends Controller {
     protected $auth;
 
     /**
+     * @var ArticleRepository
+     */
+    protected $articleRepo;
+
+    /**
      * Create articles controller instance 
      *
      * @param Guard $auth
      */
-    public function __construct(Guard $auth)
+    public function __construct(Guard $auth, ArticleRepository $articleRepo)
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
         $this->auth = $auth;
+        $this->articleRepo = $articleRepo;
     }
 
 	/**
@@ -34,7 +44,7 @@ class ArticlesController extends Controller {
 	 */
 	public function index()
 	{
-		$articles = Article::with('user')->latest('published_at')->published()->get();
+        $articles = $this->articleRepo->getAllPublished();
 
         return view('articles.index', compact('articles'));
 	}
@@ -46,9 +56,9 @@ class ArticlesController extends Controller {
 	 */
 	public function create()
 	{
-        $tags = Tag::lists('name', 'id');
+        $data = $this->dispatch(new CreateArticle);
 
-		return view('articles.create', compact('tags'));
+		return view('articles.create', $data);
 	}
 
 	/**
@@ -138,12 +148,18 @@ class ArticlesController extends Controller {
      */
     private function createArticle(ArticleRequest $request)
     {
-        $article = $this->auth->user()->articles()->create($request->all());
+        $article = $this->dispatch(
+            new StoreArticle($request->all())
+        );
 
-        if ($request->has('tag_list'))
-            $article->tags()->attach($request->input('tag_list'));
-        
-        return $article;    
+        return $article;
+
+        // $article = $this->auth->user()->articles()->create($request->all());
+        //
+        // if ($request->has('tag_list'))
+        //     $article->tags()->attach($request->input('tag_list'));
+        //
+        // return $article;    
     }
 
 }

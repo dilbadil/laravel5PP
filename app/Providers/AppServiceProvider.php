@@ -25,14 +25,28 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+        // Registrar
 		$this->app->bind(
 			'Illuminate\Contracts\Auth\Registrar',
 			'App\Services\Registrar'
 		);
 
+        // UserRepository
         $this->app->bind(
             'App\Contracts\UserRepository',
             'App\Repositories\Users\UserEloquent'
+        );
+
+        // ArticleRepository
+        $this->app->bind(
+            'App\Contracts\ArticleRepository',
+            'App\Repositories\Articles\ArticleEloquent'
+        );
+
+        // TagRepository
+        $this->app->bind(
+            'App\Contracts\TagRepository',
+            'App\Repositories\Tags\TagEloquent'
         );
 	}
 
