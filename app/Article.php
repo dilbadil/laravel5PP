@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class Article extends Model {
 
@@ -96,6 +97,28 @@ class Article extends Model {
     public function getTagListAttribute()
     {
         return $this->tags->lists('id');
+    }
+
+    /**
+     * Generate slug for the article.
+     *
+     * @param string $slug
+     * @return string
+     */
+    public function generateSlug($slug = "")
+    {
+        $slug = ($slug) ? $slug : Str::slug($this->title);
+
+        $checkSlug = $this->whereSlug($slug)
+            ->whereNotIn('id', [$this->id])
+            ->first();
+
+        if ($checkSlug)
+        {
+            $slug = $this->id . '-' . $slug;
+        }
+
+        return $slug;
     }
 
 }

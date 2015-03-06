@@ -43,6 +43,7 @@ class PublishArticleHandler {
 
         $article = $this->auth->user()->articles()->create($articleCommand);
 
+        // Attach tags or create a new if it doesn't exist.
         if (isset($articleCommand['tag_list']))
         {
             $tagsToStore = $articleCommand['tag_list'];
@@ -56,6 +57,9 @@ class PublishArticleHandler {
                 $article->tags()->attach($tagToStore);
             }
         }
+
+        // Generate slug.
+        $slug = $article->generateSlug();
 
         return $article;    
 	}

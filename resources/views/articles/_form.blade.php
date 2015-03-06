@@ -3,6 +3,13 @@
     {!! Form::text('title', null, ['placeholder' => 'Title', 'class' => 'form-control']) !!}
 </div>
 
+@if ($isShowSlug)
+    <div class="form-group">
+        {!! Form::label('slug', 'Slug:') !!}
+        {!! Form::text('slug', null, ['placeholder' => 'Slug', 'class' => 'form-control']) !!}
+    </div>
+@endif
+
 <div class="form-group">
     {!! Form::label('body', 'Body:') !!}
     {!! Form::textarea('body', null, ['class' => 'form-control']) !!}
