@@ -7,16 +7,17 @@ class DeleteAnUser extends Command {
     /**
      * @var int
      */
-    public $id;
+    public $userId;
 
 	/**
 	 * Create a new command instance.
 	 *
+     * @param int $userId
 	 * @return void
 	 */
-	public function __construct($id)
+	public function __construct($userId)
 	{
-		$this->id = $id;
+		$this->userId = $userId;
 	}
 
 }

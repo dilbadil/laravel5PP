@@ -26,17 +26,11 @@ class UpdateAnUserHandler {
 	 * Handle the command.
 	 *
 	 * @param  UdateAnUser  $command
-	 * @return array
+	 * @return \App\User
 	 */
 	public function handle(UpdateAnUser $command)
 	{
-        $oldUser = $this->userRepo->getById($command->user['id']);
-        $user = $this->userRepo->update($command->user);
-
-        return [
-            'user' => $user,
-            'old_user' => $oldUser,
-        ];
+        return $this->userRepo->update($command->userId, $command->data);
 	}
 
 }

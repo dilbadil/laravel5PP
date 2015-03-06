@@ -5,7 +5,7 @@ interface UserRepository {
     /**
      * Get all users.
      *
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getAll();
 
@@ -13,6 +13,7 @@ interface UserRepository {
      * Store the user.
      *
      * @param array $user
+     * @return \App\User
      */
     public function store(array $user);
 
@@ -20,7 +21,7 @@ interface UserRepository {
      * Get by their id.
      *
      * @param int $id
-     * @return array
+     * @return \App\User
      */
     public function getById($id);
 
@@ -28,15 +29,16 @@ interface UserRepository {
      * Get by their username.
      *
      * @param string $username
-     * @return array
+     * @return \App\User
      */
     public function getByUsername($username);
 
     /**
      * Update the user.
      *
-     * @param array $user
-     * @return mixed
+     * @param int $userId
+     * @param array $data
+     * @return return \App\User
      */
-    public function update(array $user);
+    public function update($userId, array $user);
 }

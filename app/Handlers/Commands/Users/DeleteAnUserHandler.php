@@ -26,13 +26,11 @@ class DeleteAnUserHandler {
 	 * Handle the command.
 	 *
 	 * @param  DeleteAnUser  $command
-	 * @return array
+	 * @return \App\User
 	 */
 	public function handle(DeleteAnUser $command)
 	{
-		$user = $this->userRepo->delete($command->id);
-
-        return compact('user');
+		return $this->userRepo->delete($command->userId);
 	}
 
 }

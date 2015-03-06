@@ -34,13 +34,11 @@ class UpdateArticleHandler {
 	 * Handle the command.
 	 *
 	 * @param  UpdateArticle  $command
-	 * @return void
+	 * @return Article 
 	 */
 	public function handle(UpdateArticle $command)
 	{
-        $articleCommand = $command->article;
-
-        $article = $this->articleRepo->update($articleCommand);
+        $article = $this->articleRepo->update($command->articleId, $command->input);
 
         return $article;
 	}

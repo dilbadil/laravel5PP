@@ -72,12 +72,12 @@ class ArticlesController extends Controller {
 	/**
 	 * Display the specified article.
 	 *
-	 * @param  string $id
+	 * @param  string $articleSlug
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($articleSlug)
 	{
-        $article = $this->articleRepo->getPublishedById($id);
+        $article = $this->articleRepo->getPublishedBySlug($articleSlug);
 
         return view('articles.show', compact('article'));
 	}
@@ -85,13 +85,13 @@ class ArticlesController extends Controller {
 	/**
 	 * Show the form for editing the specified article.
 	 *
-	 * @param  string  $id
+	 * @param  string  $articleSlug
 	 * @param  Tag  $tag
 	 * @return Response
 	 */
-	public function edit($id, Tag $tag)
+	public function edit($articleSlug, Tag $tag)
 	{
-        $article = $this->articleRepo->getPublishedById($id);
+        $article = $this->articleRepo->getPublishedBySlug($articleSlug);
         $tags = $tag->lists('name', 'id');
 
         return view('articles.edit', compact('article', 'tags'));
@@ -100,15 +100,13 @@ class ArticlesController extends Controller {
 	/**
 	 * Update the specified article in storage.
 	 *
-	 * @param  string  $id
+	 * @param  string  $articleId
 	 * @return Response
 	 */
-	public function update($id, ArticleRequest $request)
+	public function update($articleId, ArticleRequest $request)
 	{
-       $articleRequest = array_add($request->all(), 'id', $id);
-
        $this->dispatch(
-           new UpdateArticle($articleRequest)
+           new UpdateArticle($articleId, $request->all())
        );
 
         return redirectImportant('articles','Your article has been updated');
@@ -117,12 +115,12 @@ class ArticlesController extends Controller {
 	/**
 	 * Remove the specified article from storage.
 	 *
-	 * @param  int  $id
+	 * @param  int  $articleId
 	 * @return void
 	 */
-	public function destroy($id)
+	public function destroy($articleId)
 	{
-		$article = $this->articleRepo->delete($id);
+		$article = $this->articleRepo->delete($articleId);
 
         return redirectImportant('articles', 'Article has been deleted');
 	}

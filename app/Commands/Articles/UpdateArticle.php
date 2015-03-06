@@ -7,17 +7,24 @@ class UpdateArticle extends Command {
     /**
      * @var array
      */
-    public $article;
+    public $input;
+
+    /**
+     * @var int
+     */
+    public $articleId;
 
 	/**
 	 * Create a new command instance.
 	 *
+     * @param int $articleId
      * @param array $article
 	 * @return void
 	 */
-	public function __construct(array $article)
+	public function __construct($articleId, array $input)
 	{
-		$this->article = $article;
+		$this->articleId = $articleId;
+        $this->input = $input;
 	}
 
 }

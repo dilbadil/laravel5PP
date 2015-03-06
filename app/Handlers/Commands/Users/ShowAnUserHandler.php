@@ -26,13 +26,11 @@ class ShowAnUserHandler {
 	 * Handle the command.
 	 *
 	 * @param  ShowAnUser  $command
-	 * @return void
+	 * @return \App\User
 	 */
 	public function handle(ShowAnUser $command)
 	{
-		$user = $this->userRepo->getByUsername($command->username);
-
-        return compact('user');
+		return $this->userRepo->getByUsername($command->username);
 	}
 
 }

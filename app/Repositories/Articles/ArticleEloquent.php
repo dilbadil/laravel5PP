@@ -42,29 +42,41 @@ class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInt
     /**
      * Get one published article by their id.
      *
-     * @param int $id
+     * @param int $articleId
      * @return Article
      */
-    public function getPublishedById($id)
+    public function getPublishedById($articleId)
     {
-        return $this->model->with('user')->published()->findOrFail($id);
+        return $this->model->with('user')->published()->findOrFail($articleId);
+    }
+
+    /**
+     * Get one published article by their slug.
+     *
+     * @param int $articleSlug
+     * @return Article
+     */
+    public function getPublishedBySlug($articleSlug)
+    {
+        return $this->model->with('user')->published()->whereSlug($articleSlug)->first();
     }
 
     /**
      * Update article with the given data.
      *
-     * @param array $data
+     * @param int $articleId
+     * @param array $input
      * @return Article
      */
-    public function update(array $data)
+    public function update($articleId, array $input)
     {
-        $article = $this->model->findOrFail($data['id']);
-        $article->update($data);
+        $article = $this->model->findOrFail($articleId);
+        $article->update($input);
 
-        if (isset($data['tag_list']))
+        if (isset($input['tag_list']))
         {
             $tagIds = $this->tag->lists('id');
-            $tagIdsToStore = $data['tag_list'];
+            $tagIdsToStore = $input['tag_list'];
             $newTags = [];
 
             foreach ($tagIdsToStore as $tagIdToStore)

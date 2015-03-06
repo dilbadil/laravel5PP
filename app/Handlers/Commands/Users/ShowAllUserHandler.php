@@ -32,15 +32,13 @@ class ShowAllUserHandler {
 	 * Handle the command.
 	 *
 	 * @param  ShowAllUser  $command
-	 * @return array
+	 * @return \Illuminate\Database\Eloquent\Collection
 	 */
 	public function handle(ShowAllUser $command)
 	{
 		$this->command = $command;
 
-        $users = $this->userRepo->getAll();
-
-        return compact('users');
+        return $this->userRepo->getAll();
 	}
 
 }

@@ -23,11 +23,11 @@ abstract class EloquentRepository
     /**
      * Get all data model.
      *
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getAll()
     {
-        return $this->model->all()->toArray();
+        return $this->model->all();
     }
 
     /**
@@ -42,42 +42,32 @@ abstract class EloquentRepository
     }
 
     /**
-     * get data model by id.
+     * Update the model by their id.
      *
      * @param int $id
-     * @return array
-     */
-    public function getById($id)
-    {
-        return $this->findById($id)->toArray();
-    }
-
-    /**
-     * Update the model.
-     *
      * @param array $data
-     * @return array
+     * @return Model
      */
-    public function update(array $data)
+    public function update($id, array $data)
     {
-        $model = $this->findById($data['id']);
+        $model = $this->findById($id);
         $model->update($data);
 
-        return $model->toArray();
+        return $model;
     }
 
     /**
      * Delete the model by id.
      *
      * @param int $id
-     * @return array
+     * @return Model
      */
     public function delete($id)
     {
         $model = $this->findById($id);
         $model->delete();
 
-        return $model->toArray();
+        return $model;
     }
 
 }

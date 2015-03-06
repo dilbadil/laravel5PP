@@ -31,9 +31,9 @@ class UsersController extends Controller {
 	 */
 	public function index()
 	{
-        $result = $this->dispatch(new ShowAllUser);
+        $users = $this->dispatch(new ShowAllUser);
 
-        return view('users.index', $result);
+        return view('users.index', compact('users'));
 	}
 
 	/**
@@ -54,11 +54,11 @@ class UsersController extends Controller {
 	 */
 	public function store(UserRequest $request)
 	{
-        $result = $this->dispatch(
+        $user = $this->dispatch(
             new StoreUser($request->all())
         );
 
-        return redirectImportant('users', $result['user']['email'] . ' has been created');
+        return redirectImportant('users', $user->email . ' has been created');
 	}
 
 	/**
@@ -69,11 +69,11 @@ class UsersController extends Controller {
 	 */
 	public function show($username)
 	{
-        $result = $this->dispatch(
+        $user = $this->dispatch(
             new ShowAnUser($username) 
         );
 
-		return view('users.show', $result);
+		return view('users.show', compact('user'));
 	}
 
 	/**
@@ -84,44 +84,42 @@ class UsersController extends Controller {
 	 */
 	public function edit($username)
 	{
-        $data = $this->dispatch(
+        $user = $this->dispatch(
             new ShowAnUser($username)
         );
 
-		return view('users.edit', $data);
+		return view('users.edit', compact('user'));
 	}
 
 	/**
 	 * Update the specified user in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int  $userId 
 	 * @param  UserRequest  $request
 	 * @return Response
 	 */
-	public function update(UserRequest $request, $id)
+	public function update(UserRequest $request, $userId)
 	{
-        $data = array_add($request->all(), 'id', $id);
-
-        $result = $this->dispatch(
-            new UpdateAnUser($data) 
+        $user = $this->dispatch(
+            new UpdateAnUser($userId, $request->all()) 
         );
 
-        return redirectImportant('users', "User " . $result['old_user']['email'] . " has been updated to " . $result['user']['email']);
+        return redirectImportant('users', "User " . $request->input('email') . " has been updated");
 	}
 
 	/**
 	 * Remove the specified user from storage.
 	 *
-	 * @param  int  $id
+	 * @param  int  $userId
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($userId)
 	{
-        $result = $this->dispatch(
-            new DeleteAnUser($id) 
+        $user = $this->dispatch(
+            new DeleteAnUser($userId) 
         );
 
-        return redirectImportant('users', "User " . $result['user']['email'] . " has been deleted");
+        return redirectImportant('users', "User " . $user->email . " has been deleted");
 	}
 
 }

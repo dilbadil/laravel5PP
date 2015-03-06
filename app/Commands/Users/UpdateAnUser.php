@@ -7,7 +7,12 @@ class UpdateAnUser extends Command {
     /**
      * @var array
      */
-    public $user;
+    public $data;
+
+    /**
+     * @var int
+     */
+    public $userId;
 
 	/**
 	 * Create a new command instance.
@@ -15,9 +20,10 @@ class UpdateAnUser extends Command {
 	 * @param array $user
 	 * @return void
 	 */
-	public function __construct($user)
+	public function __construct($userId, $data)
 	{
-		$this->user = $user;
+        $this->userId = $userId;
+		$this->data = $data;
 	}
 
 }

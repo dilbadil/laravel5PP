@@ -34,52 +34,51 @@ class UserEloquent extends EloquentRepository implements UserRepositoryInterface
      * Get user by id + their articles.
      *
      * @param int $id
-     * @return array
+     * @return User
      */
     public function getById($id)
     {
         return $this->model->with('articles')
-            ->findOrFail($id)
-            ->toArray();
+            ->findOrFail($id);
     }
 
     /**
      * Get user by id + their articles.
      *
      * @param string $username
-     * @return array
+     * @return User
      */
     public function getByUsername($username)
     {
         return $this->model->with('articles')
             ->where('username', $username)
-            ->firstOrFail()
-            ->toArray();
+            ->firstOrFail();
     }
 
     /**
      * Store user to database.
      *
      * @param array $user
-     * @return array
+     * @return User
      */
     public function store(array $user)
     {
-        return $this->registrar->create($user)->toArray();
+        return $this->registrar->create($user);
     }
 
     /**
      * Update an user to database.
      *
+     * @param int $userId
      * @param array $data
-     * @return array
+     * @return User
      */
-    public function update(array $data)
+    public function update($userId, array $data)
     {
         if (isset($data['password']))
             $data['password'] = bcrypt($data['password']);
 
-        return parent::update($data);
+        return parent::update($userId, $data);
     }
 
 }

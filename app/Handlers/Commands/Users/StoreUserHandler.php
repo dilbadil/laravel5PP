@@ -27,13 +27,11 @@ class StoreUserHandler {
 	 * Handle the command.
 	 *
 	 * @param  StoreUser  $command
-	 * @return array
+	 * @return \App\User
 	 */
 	public function handle(StoreUser $command)
 	{
-        $user = $this->userRepo->store($command->user);
-
-        return compact('user');
+        return $this->userRepo->store($command->user);
 	}
 
 }

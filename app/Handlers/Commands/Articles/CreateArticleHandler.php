@@ -2,6 +2,7 @@
 
 use App\Commands\Articles\CreateArticle;
 use App\Tag;
+use App\Article;
 use App\Contracts\TagRepository;
 
 use Illuminate\Queue\InteractsWithQueue;
@@ -13,15 +14,21 @@ class CreateArticleHandler {
      */
     protected $tagRepo;
 
+    /**
+     * @var Article
+     */
+    protected $article;
+
 	/**
 	 * Create the command handler.
 	 *
      * @param TagRepository
 	 * @return void
 	 */
-	public function __construct(TagRepository $tagRepo)
+	public function __construct(TagRepository $tagRepo, Article $article)
 	{
 		$this->tagRepo = $tagRepo;
+		$this->article = $article;
 	}
 
 	/**
@@ -33,8 +40,9 @@ class CreateArticleHandler {
 	public function handle(CreateArticle $command)
 	{
         $tags = $this->tagRepo->getLists();
+        $article = $this->article; 
 
-        return compact('tags');
+        return compact('tags', 'article');
 	}
 
 }

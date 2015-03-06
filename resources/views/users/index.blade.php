@@ -6,7 +6,7 @@
     <ul>
     @foreach ($users as $user)
         <li>
-            <a href="{! route('users.show', [$user['username']]) !}">{! $user['email'] !}</a></li>
+            <a href="{! route('users.show', [$user->username]) !}">{! $user->email !}</a></li>
     @endforeach
     </ul>
     
