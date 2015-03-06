@@ -27,12 +27,12 @@ class RouteServiceProvider extends ServiceProvider {
 
         // bind user
 		// $router->model('users', 'App\User');
-
+        
         // bind article
-        $router->bind('articles', function($id)
-        {
-            return \App\Article::with('user')->published()->findOrFail($id);
-        });
+        // $router->bind('articles', function($id)
+        // {
+        //     return \App\Article::with('user')->published()->findOrFail($id);
+        // });
 
         // bind tags
         $router->bind('tags', function($name)

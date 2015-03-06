@@ -3,7 +3,6 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Guard;
 use App\Article;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\HttpResponse;
@@ -11,14 +10,10 @@ use App\Tag;
 use App\Contracts\ArticleRepository;
 
 use App\Commands\Articles\CreateArticle;
-use App\Commands\Articles\StoreArticle;
+use App\Commands\Articles\PublishArticle;
+use App\Commands\Articles\UpdateArticle;
 
 class ArticlesController extends Controller {
-
-    /**
-     * @var Guard
-     */
-    protected $auth;
 
     /**
      * @var ArticleRepository
@@ -28,12 +23,11 @@ class ArticlesController extends Controller {
     /**
      * Create articles controller instance 
      *
-     * @param Guard $auth
+     * @param ArticleRepository $articleRepo
      */
-    public function __construct(Guard $auth, ArticleRepository $articleRepo)
+    public function __construct(ArticleRepository $articleRepo)
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
-        $this->auth = $auth;
         $this->articleRepo = $articleRepo;
     }
 
@@ -68,34 +62,37 @@ class ArticlesController extends Controller {
 	 */
 	public function store(ArticleRequest $request)
 	{
-        $this->createArticle($request);
+        $article = $this->dispatch(
+            new PublishArticle($request->all())
+        );
 
-        return redirect('articles')->with([
-            'flash_message' => 'Your article has been created',
-            'flash_message_important' => true
-        ]);
+        return redirectImportant('articles','Your article has been created');
 	}
 
 	/**
 	 * Display the specified article.
 	 *
-	 * @param  Article $article
+	 * @param  string $id
 	 * @return Response
 	 */
-	public function show(Article $article)
+	public function show($id)
 	{
+        $article = $this->articleRepo->getPublishedById($id);
+
         return view('articles.show', compact('article'));
 	}
 
 	/**
 	 * Show the form for editing the specified article.
 	 *
-	 * @param  Article  $article
+	 * @param  string  $id
+	 * @param  Tag  $tag
 	 * @return Response
 	 */
-	public function edit(Article $article)
+	public function edit($id, Tag $tag)
 	{
-        $tags = Tag::lists('name', 'id');
+        $article = $this->articleRepo->getPublishedById($id);
+        $tags = $tag->lists('name', 'id');
 
         return view('articles.edit', compact('article', 'tags'));
 	}
@@ -103,63 +100,31 @@ class ArticlesController extends Controller {
 	/**
 	 * Update the specified article in storage.
 	 *
-	 * @param  Article  $article
+	 * @param  string  $id
 	 * @return Response
 	 */
-	public function update(Article $article, ArticleRequest $request)
+	public function update($id, ArticleRequest $request)
 	{
-        $article->update($request->all());
+       $articleRequest = array_add($request->all(), 'id', $id);
 
-        if ($request->has('tag_list'))
-            $this->syncTags($article, $request->input('tag_list'));
+       $this->dispatch(
+           new UpdateArticle($articleRequest)
+       );
 
-        return redirect('articles');
+        return redirectImportant('articles','Your article has been updated');
 	}
 
 	/**
 	 * Remove the specified article from storage.
 	 *
-	 * @param  Article  $article
+	 * @param  int  $id
 	 * @return void
 	 */
-	public function destroy(Article $article)
+	public function destroy($id)
 	{
-		$article->delete();
+		$article = $this->articleRepo->delete($id);
 
-        return redirect('articles');
+        return redirectImportant('articles', 'Article has been deleted');
 	}
-
-    /**
-     * Sync up the list of tags in the database.
-     *
-     * @param Article $article
-     * @param array $tags
-     */
-    private function syncTags(Article $article, array $tags)
-    {
-        $article->tags()->sync($tags);
-    }
-
-    /**
-     * Save a new article
-     *
-     * @param ArticleRequest $request
-     * @return mixed
-     */
-    private function createArticle(ArticleRequest $request)
-    {
-        $article = $this->dispatch(
-            new StoreArticle($request->all())
-        );
-
-        return $article;
-
-        // $article = $this->auth->user()->articles()->create($request->all());
-        //
-        // if ($request->has('tag_list'))
-        //     $article->tags()->attach($request->input('tag_list'));
-        //
-        // return $article;    
-    }
 
 }

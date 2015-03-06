@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model {
 
     /**
-     * Fillable for tag 
+     * Fillable for tag.
      *
      * @var array
      */
@@ -15,7 +15,7 @@ class Tag extends Model {
     ];
 
     /**
-     * Get the articles associated with the given tags
+     * Get the articles associated with the given tags.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

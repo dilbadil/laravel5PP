@@ -58,7 +58,7 @@ class UsersController extends Controller {
             new StoreUser($request->all())
         );
 
-        return $this->redirectImportant($result['user']['email'] . ' has been created');
+        return redirectImportant('users', $result['user']['email'] . ' has been created');
 	}
 
 	/**
@@ -106,7 +106,7 @@ class UsersController extends Controller {
             new UpdateAnUser($data) 
         );
 
-        return $this->redirectImportant("User " . $result['old_user']['email'] . " has been updated to " . $result['user']['email']);
+        return redirectImportant('users', "User " . $result['old_user']['email'] . " has been updated to " . $result['user']['email']);
 	}
 
 	/**
@@ -121,21 +121,7 @@ class UsersController extends Controller {
             new DeleteAnUser($id) 
         );
 
-        return $this->redirectImportant("User " . $result['user']['email'] . " has been deleted");
+        return redirectImportant('users', "User " . $result['user']['email'] . " has been deleted");
 	}
-
-    /**
-     * Redirect with important message.
-     *
-     * @param string $message
-     * @return void
-     */
-    protected function redirectImportant($message)
-    {
-        return redirect('users')->with([
-            'flash_message' => $message,
-            'flash_message_important' => true
-        ]);
-    }
 
 }

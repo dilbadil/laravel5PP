@@ -60,10 +60,10 @@ abstract class EloquentRepository
      */
     public function update(array $data)
     {
-        $user = $this->findById($data['id']);
-        $user->update($data);
+        $model = $this->findById($data['id']);
+        $model->update($data);
 
-        return $user->toArray();
+        return $model->toArray();
     }
 
     /**
@@ -74,10 +74,10 @@ abstract class EloquentRepository
      */
     public function delete($id)
     {
-        $user = $this->findById($id);
-        $user->delete();
+        $model = $this->findById($id);
+        $model->delete();
 
-        return $user->toArray();
+        return $model->toArray();
     }
 
 }

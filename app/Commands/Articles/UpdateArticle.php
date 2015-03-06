@@ -1,9 +1,8 @@
 <?php namespace App\Commands\Articles;
 
 use App\Commands\Command;
-use App\Http\Requests\ArticleRequest;
 
-class StoreArticle extends Command {
+class UpdateArticle extends Command {
 
     /**
      * @var array

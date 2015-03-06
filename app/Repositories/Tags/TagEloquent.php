@@ -9,7 +9,7 @@ class TagEloquent extends EloquentRepository implements TagRepositoryInterface {
     /**
      * @var Tag
      */
-    protected $tag;
+    protected $model;
 
     /**
      * Instance of repository.
@@ -19,7 +19,7 @@ class TagEloquent extends EloquentRepository implements TagRepositoryInterface {
      */
     public function __construct(Tag $tag)
     {
-        $this->tag = $tag;
+        $this->model = $tag;
     }
 
     /**
@@ -29,7 +29,7 @@ class TagEloquent extends EloquentRepository implements TagRepositoryInterface {
      */
     public function getLists()
     {
-        return $this->tag->lists('name', 'id');
+        return $this->model->lists('name', 'id');
     }
 
 }
