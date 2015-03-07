@@ -20,6 +20,10 @@ Route::resource('articles', 'ArticlesController');
 // Tags
 Route::resource('tags', 'TagsController');
 
+// Profile
+Route::resource('profile', 'ProfileController'
+    , ['only' => ['index', 'edit', 'update']]);
+
 // Admin
 Route::get('dashboard', 'DashboardController@index');
 Route::get('tasks', 'TasksController@index');

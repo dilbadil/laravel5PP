@@ -18,7 +18,9 @@
 
                 @if (Auth::check())
                     <li><a href="{! route('articles.create') !}">Create</a></li>
-                    <li><a href="{! route('users.index') !}">Users</a></li>
+                    @if ($currentUser->isAdmin())
+                        <li><a href="{! route('users.index') !}">Users</a></li>
+                    @endif
                 @endif
             </ul>
 
@@ -33,7 +35,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{! $currentUser->username !} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{! route('users.show', [$currentUser->username]) !}">Profile</a></li>
+                            <li><a href="{! route('profile.index', [$currentUser->username]) !}">Profile</a></li>
                             <li><a href="{! action('Auth\AuthController@getLogout') !}">Logout</a></li>
                         </ul>
                     </li>

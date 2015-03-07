@@ -2,6 +2,7 @@
 
 use App\Http\Requests\Request;
 use App\User;
+use Illuminate\Support\Collection;
 
 class UserRequest extends Request {
 
@@ -27,14 +28,14 @@ class UserRequest extends Request {
 	 */
 	public function rules()
 	{
-        $parameters = $this->route()->parameters();
+        $segments = Collection::make($this->segments());
 
         $rules = User::$rules;
 
         if (in_array($this->method, $this->updateMethods))
         {
-            $rules['email'] = 'required|email|unique:users,email,' . $parameters['users'];
-            $rules['username'] = 'required|alpha_dash|unique:users,username,' . $parameters['users'];
+            $rules['email'] = 'required|email|unique:users,email,' . $segments->last();
+            $rules['username'] = 'required|alpha_dash|unique:users,username,' . $segments->last();
         }
 
         return $rules;
