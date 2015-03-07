@@ -52,7 +52,7 @@ class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInt
      * @param int $limit
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getPublishedPaginated($limit = 6)
+    public function getPublishedPaginated($limit = 4)
     {
         return $this->article->with('user')
             ->latest()

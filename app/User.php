@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Collection;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -55,16 +56,25 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Determine that current user is a manager or not
+     * A user can have many roles.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
+
+    /**
+     * Determine that the user is administrator.
      *
      * @return bool
      */
-    public function isATeamManager()
+    public function isAdmin()
     {
-        if ($this->id != 2)
-            return false;
-
-        return true;
+        $roles = Collection::make($this->roles->toArray());
+        
+        return $roles->contains('id', 1);
     }
 
 }

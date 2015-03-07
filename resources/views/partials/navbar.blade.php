@@ -31,9 +31,9 @@
                 @else
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{! $user->username !} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{! $currentUser->username !} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{! route('users.show', [$user->username]) !}">Profile</a></li>
+                            <li><a href="{! route('users.show', [$currentUser->username]) !}">Profile</a></li>
                             <li><a href="{! action('Auth\AuthController@getLogout') !}">Logout</a></li>
                         </ul>
                     </li>

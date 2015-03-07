@@ -11,6 +11,7 @@ class ViewComposerServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
+        $this->composeLayout();
         $this->composeNavigation();
 	}
 
@@ -32,6 +33,16 @@ class ViewComposerServiceProvider extends ServiceProvider {
     private function composeNavigation()
     {
         view()->composer('partials.navbar', 'App\Http\Composers\NavigationComposer');
+    }
+
+    /**
+     * Compose the layout.
+     *
+     * @return void
+     */
+    private function composeLayout()
+    {
+        view()->composer('*', 'App\Http\Composers\LayoutComposer');
     }
 
 }

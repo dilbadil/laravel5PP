@@ -33,7 +33,9 @@
         <div class="form-group">          
             {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'DELETE', ]) !!}
                 <a class="btn btn-primary" href="{! route('users.edit', [$user->username]) !}">edit</a>
-                <button class="btn btn-danger" type="submit">delete</button>
+                @if ($user->isAdmin())
+                    <button class="btn btn-danger" type="submit">delete</button>
+                @endif
             {!! Form::close() !!}
         </div>
     @endif

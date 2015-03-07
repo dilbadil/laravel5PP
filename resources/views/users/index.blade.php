@@ -10,7 +10,7 @@
     @endforeach
     </ul>
     
-    @if (Auth::check())
+    @if ($currentUser->isAdmin())
         <hr/>
         <div class="form-group">
             <a class="btn btn-primary" href="{! route('users.create') !}">Add user</a>

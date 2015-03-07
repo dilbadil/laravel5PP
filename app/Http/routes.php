@@ -24,9 +24,3 @@ Route::resource('tags', 'TagsController');
 Route::get('dashboard', 'DashboardController@index');
 Route::get('tasks', 'TasksController@index');
 Route::resource('users', 'UsersController');
-
-// Temporary
-Route::get('foo', ['middleware' => 'manager', function()
-{
-    return "this page may be viewed only manager";
-}]);
