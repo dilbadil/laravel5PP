@@ -15,7 +15,7 @@ class UserEloquent extends EloquentRepository implements UserRepositoryInterface
     /**
      * @var User
      */
-    protected $model;
+    protected $user;
 
     /**
      * Instance of Repository.
@@ -26,8 +26,10 @@ class UserEloquent extends EloquentRepository implements UserRepositoryInterface
      */
     public function __construct(User $user, Registrar $registrar)
     {
+        parent::__construct($user);
+
         $this->registrar = $registrar;
-        $this->model = $user;
+        $this->user = $user;
     }
 
     /**
@@ -38,7 +40,7 @@ class UserEloquent extends EloquentRepository implements UserRepositoryInterface
      */
     public function getById($id)
     {
-        return $this->model->with('articles')
+        return $this->user->with('articles')
             ->findOrFail($id);
     }
 
@@ -50,7 +52,7 @@ class UserEloquent extends EloquentRepository implements UserRepositoryInterface
      */
     public function getByUsername($username)
     {
-        return $this->model->with('articles')
+        return $this->user->with('articles')
             ->where('username', $username)
             ->firstOrFail();
     }

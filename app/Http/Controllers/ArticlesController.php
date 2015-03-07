@@ -38,7 +38,8 @@ class ArticlesController extends Controller {
 	 */
 	public function index()
 	{
-        $articles = $this->articleRepo->getAllPublished();
+        $articles = $this->articleRepo->getPublishedPaginated();
+        // $articles = $this->articleRepo->getAllPublished();
 
         return view('articles.index', compact('articles'));
 	}

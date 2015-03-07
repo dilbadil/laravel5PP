@@ -8,17 +8,17 @@ class PublishArticle extends Command {
     /**
      * @var array
      */
-    public $article;
+    public $input;
 
 	/**
 	 * Create a new command instance.
 	 *
-     * @param array $article
+     * @param array $input
 	 * @return void
 	 */
-	public function __construct(array $article)
+	public function __construct(array $input)
 	{
-		$this->article = $article;
+		$this->input = $input;
 	}
 
 }

@@ -9,7 +9,7 @@ class TagEloquent extends EloquentRepository implements TagRepositoryInterface {
     /**
      * @var Tag
      */
-    protected $model;
+    protected $tag;
 
     /**
      * Instance of repository.
@@ -19,7 +19,9 @@ class TagEloquent extends EloquentRepository implements TagRepositoryInterface {
      */
     public function __construct(Tag $tag)
     {
-        $this->model = $tag;
+        parent::__construct($tag);
+
+        $this->tag = $tag;
     }
 
     /**
@@ -29,7 +31,30 @@ class TagEloquent extends EloquentRepository implements TagRepositoryInterface {
      */
     public function getLists()
     {
-        return $this->model->lists('name', 'id');
+        return $this->tag->lists('name', 'id');
+    }
+
+    /**
+     * Release ids of input and create one if not exist.
+     *
+     * @example [1, 2, 'new tag'] -> [1, 2, 3] | 3 is id of new tag
+     * @param array $tagsToStore
+     * @return array
+     */
+    public function release(array $tagsToStore)
+    {
+        $tagIds = $this->tag->lists('id');
+        $releaseIds = [];
+
+        foreach ($tagsToStore as $tagToStore)
+        {
+            if (! in_array($tagToStore, $tagIds))    
+                $tagToStore = $this->tag->create(['name' => $tagToStore])->id;
+
+            $releaseIds[] = $tagToStore;
+        }
+
+        return $releaseIds;
     }
 
 }

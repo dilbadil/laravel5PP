@@ -3,30 +3,34 @@
 use App\Contracts\ArticleRepository as ArticleRepositoryInterface;
 use App\Repositories\EloquentRepository;
 use App\Article;
-use App\Tag;
+use App\User;
+use App\Contracts\TagRepository;
 
 class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInterface {
 
     /**
      * @var Article
      */
-    protected $model;
+    protected $article;
 
     /**
-     * @var Tag
+     * @var TagRepository
      */
-    protected $tag;
+    protected $tagRepo;
 
     /**
      * Instance of Repository.
      *
      * @param Article $article
+     * @param TagRepository $tagRepo
      * @return void
      */
-    public function __construct(Article $article, Tag $tag)
+    public function __construct(Article $article, TagRepository $tagRepo)
     {
-        $this->model = $article;
-        $this->tag = $tag;
+        parent::__construct($article);
+
+        $this->article = $article;
+        $this->tagRepo = $tagRepo;
     }
 
     /**
@@ -36,7 +40,24 @@ class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInt
      */
     public function getAllPublished()
     {
-		return $this->model->with('user')->latest()->published()->get();
+        return $this->article->with('user')
+            ->latest()
+            ->published()
+            ->get();
+    }
+
+    /**
+     * Get paginated articles that has been published.
+     *
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getPublishedPaginated($limit = 6)
+    {
+        return $this->article->with('user')
+            ->latest()
+            ->published()
+            ->simplePaginate($limit);
     }
 
     /**
@@ -47,7 +68,9 @@ class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInt
      */
     public function getPublishedById($articleId)
     {
-        return $this->model->with('user')->published()->findOrFail($articleId);
+        return $this->article->with('user')
+            ->published()
+            ->findOrFail($articleId);
     }
 
     /**
@@ -58,7 +81,10 @@ class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInt
      */
     public function getPublishedBySlug($articleSlug)
     {
-        return $this->model->with('user')->published()->whereSlug($articleSlug)->first();
+        return $this->article->with('user')
+            ->published()
+            ->whereSlug($articleSlug)
+            ->first();
     }
 
     /**
@@ -70,26 +96,39 @@ class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInt
      */
     public function update($articleId, array $input)
     {
-        $article = $this->model->findOrFail($articleId);
+        $article = $this->article->findOrFail($articleId);
+
+        $input['slug'] = $article->generateSlug($input['slug']);
+
         $article->update($input);
 
         if (isset($input['tag_list']))
         {
-            $tagIds = $this->tag->lists('id');
-            $tagIdsToStore = $input['tag_list'];
-            $newTags = [];
+            $tagIds = $this->tagRepo->release($input['tag_list']);
+            $article->tags()->sync($tagIds);
+        }
 
-            foreach ($tagIdsToStore as $tagIdToStore)
-            {
-                if (! in_array($tagIdToStore, $tagIds))
-                {
-                    $tagIdToStore = $this->tag->create(['name' => $tagIdToStore])->id;
-                }
-            
-                $newTags[] = $tagIdToStore;
-            }
+        return $article;
+    }
 
-            $article->tags()->sync($newTags);
+    /**
+     * Publish a new article with handler the slug.
+     *
+     * @param User $user
+     * @param array $input
+     * @return Article
+     */
+    public function publish(User $user, $input)
+    {
+        $article = $user->articles()->create($input);
+        $article->slug = $article->generateSlug();
+        $article->save();
+
+        // Attach tags or create a new if it doesn't exist.
+        if (isset($input['tag_list']))
+        {
+            $tagIds = $this->tagRepo->release($input['tag_list']);
+            $article->tags()->attach($tagIds);
         }
 
         return $article;

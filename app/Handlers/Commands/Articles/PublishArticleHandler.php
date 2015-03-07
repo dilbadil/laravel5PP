@@ -2,6 +2,8 @@
 
 use App\Commands\Articles\PublishArticle;
 use App\Tag;
+use App\Contracts\ArticleRepository;
+use App\Contracts\TagRepository;
 
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Auth\Guard;
@@ -14,21 +16,28 @@ class PublishArticleHandler {
     protected $auth;
 
     /**
-     * @var Tag
+     * @var TagRepository
      */
-    protected $tag;
+    protected $tagRepo;
+
+    /**
+     * @var ArticleRepository
+     */
+    protected $articleRepo;
 
 	/**
 	 * Create the command handler.
 	 *
      * @param Guard $auth
-     * @param Tag $tag
+     * @param TagRepository $tagRepo
+     * @param ArticleRepository $articleRepo
 	 * @return void
 	 */
-	public function __construct(Guard $auth, Tag $tag)
+	public function __construct(Guard $auth, TagRepository $tagRepo, ArticleRepository $articleRepo)
 	{
 		$this->auth = $auth;
-		$this->tag = $tag;
+		$this->tagRepo = $tagRepo;
+        $this->articleRepo = $articleRepo;
 	}
 
 	/**
@@ -39,29 +48,9 @@ class PublishArticleHandler {
 	 */
 	public function handle(PublishArticle $command)
 	{
-        $articleCommand = $command->article;
+        $input = $command->input;
 
-        $article = $this->auth->user()->articles()->create($articleCommand);
-
-        // Attach tags or create a new if it doesn't exist.
-        if (isset($articleCommand['tag_list']))
-        {
-            $tagsToStore = $articleCommand['tag_list'];
-            $tagIds = $this->tag->lists('id');
-
-            foreach ($tagsToStore as $tagToStore)
-            {
-                if (! in_array($tagToStore, $tagIds))    
-                    $tagToStore = $this->tag->create(['name' => $tagToStore])->id;
-
-                $article->tags()->attach($tagToStore);
-            }
-        }
-
-        // Generate slug.
-        $slug = $article->generateSlug();
-
-        return $article;    
+        return $this->articleRepo->publish($this->auth->user(), $input);
 	}
 
 }

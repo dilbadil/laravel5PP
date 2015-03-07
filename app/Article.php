@@ -16,6 +16,7 @@ class Article extends Model {
         'title',
         'body',
         'published_at',
+        'slug',
     ];
 
     /**
