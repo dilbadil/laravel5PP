@@ -29,7 +29,7 @@ class TagsController extends Controller {
      */
     public function show(Tag $tag)
     {
-       $articles = $tag->articles()->published()->get(); 
+       $articles = $tag->articles()->published()->simplePaginate(6); 
 
        return view('articles.index', compact('articles'));
     }

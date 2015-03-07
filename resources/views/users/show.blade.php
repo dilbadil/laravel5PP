@@ -22,7 +22,7 @@
     <h4>{! $user->fullname !}'s' articles</h4>
     <ul>
         @forelse ($user->articles as $article)
-            <li><a href="{! route('articles.show', [$article->id]) !}">{! $article->title !}</a></li>
+            <li><a href="{! route('articles.show', [$article->slug]) !}">{! $article->title !}</a></li>
         @empty
             <p>{! $user->username !} doesn't have articles </p>
         @endforelse

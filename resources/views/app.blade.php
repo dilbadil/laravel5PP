@@ -46,7 +46,7 @@
 
     <footer>                                                                                                                                                                                  
         @section('footer')                                                                                                                                                                    
-            <p>Powered by <a href="http://laravel.com" target="_blank">Laravel</a>. Copyright &copy; Pondok Programmer 2014</p>                                                                   
+            <p>Powered by <a href="http://laravel.com" target="_blank">Laravel</a>. Copyright &copy; Dilbadil Inc</p>                                                                   
         @show                                                                                                                                                                                 
     </footer>                                                                                                                                                                                 
 
