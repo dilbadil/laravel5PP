@@ -28,7 +28,7 @@
         @endforelse
     </ul>
 
-    @if (Auth::check())
+    @if (Auth::check() && $currentUser->isAdmin())
         <hr/> 
         <div class="form-group">          
             {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'DELETE', ]) !!}

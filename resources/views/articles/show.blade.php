@@ -31,7 +31,7 @@
         </ul>
     @endunless
 
-    @if (Auth::check())
+    @if (Auth::check() && $currentUser->hasArticle($article))
         <hr/>
         <div class="btn-group" role="group" aria-label="option-article">
             {!! Form::open(['method' => 'DELETE', 'route' => ['articles.destroy', $article->id]]) !!}

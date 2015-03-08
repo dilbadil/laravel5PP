@@ -6,6 +6,9 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+
+use App\Article;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -66,15 +69,92 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Determine that the user is administrator.
+     * Determine that the user is member of given method.
      *
      * @return bool
      */
-    public function isAdmin()
+    public function __call($method, $parameters)
     {
-        $roles = Collection::make($this->roles->toArray());
+        $methodSnaked = Str::snake($method);
+
+        if (Str::startsWith($methodSnaked, 'is_') || Str::startsWith($methodSnaked, 'is_not_'))
+        {
+            if (Str::startsWith($methodSnaked, 'is_not_'))
+                return ! $this->detectMember($methodSnaked);
+
+            return $this->detectMember($methodSnaked);
+        }
+
+        return parent::__call($method, $parameters);
+    }
+
+    /**
+     * Detect the user is member of user role
+     *
+     * @param string $methodSnaked
+     * @return bool
+     */
+    private function detectMember($methodSnaked)
+    {
+        $toSnake = function($value) {
+            if (is_array($value))
+            {
+                $value = Str::snake($value['name']);
+            }
+
+            return Str::snake(str_replace(' ', '', $value));
+        };
+
+        $allRoles = Collection::make(\App\Role::lists('name', 'id'))->map($toSnake);
+        $userRoles = Collection::make($this->roles->toArray())->map($toSnake);
+
+        $methodSnaked = str_replace('is_not_', '', $methodSnaked);
+        $methodSnaked = str_replace('is_', '', $methodSnaked);
+
+        $conjunctions = ['and', 'or'];
+
+        // isAdmin, isSuperAdmin, isAuthor, etc
+        if (in_array($methodSnaked, $allRoles->toArray()))
+        {
+            return $userRoles->contains($methodSnaked);
+        }
         
-        return $roles->contains('id', 1);
+        // isAdminAndAuthor, isAuthorAndSuperAdmin, etc
+        if (Str::contains($methodSnaked, $conjunctions[0]))
+        {
+            $methodArray = explode('_and_', $methodSnaked); 
+            
+            foreach ($methodArray as $method)
+            {
+                if (! $userRoles->contains($method)) return false;
+            }
+
+            return true;
+        }
+
+        // isAdminOrAuthor, isAuthorOrAdmin, isAdminOrSuperAdmin, etc
+        if (Str::contains($methodSnaked, $conjunctions[1]))
+        {
+            $methodArray = explode('_or_', $methodSnaked); 
+
+            foreach ($methodArray as $method)
+            {
+                if ($userRoles->contains($method)) return true;
+            }
+
+            return false;
+        }
+    }
+
+    /**
+     * Determine that the user has the given article.
+     *
+     * @param Article $article
+     * @return bool
+     */
+    public function hasArticle(Article $article)
+    {
+        return $article->user->id === $this->id;
     }
 
 }
