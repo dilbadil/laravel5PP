@@ -28,6 +28,7 @@ class ArticlesController extends Controller {
     public function __construct(ArticleRepository $articleRepo)
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth.article', ['only' => ['edit', 'update', 'destroy']]);
         $this->articleRepo = $articleRepo;
     }
 

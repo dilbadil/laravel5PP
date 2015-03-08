@@ -2,8 +2,9 @@
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Collection;
 
-class RedirectIfNotAdmin {
+class RedirectIfNotArticleOwner {
 
 	/**
 	 * The Guard implementation.
@@ -32,15 +33,16 @@ class RedirectIfNotAdmin {
 	 */
 	public function handle($request, Closure $next)
 	{
-        if ($this->auth->check())
+        $index = $request->route()->getParameter('articles');
+        
+        if ($this->auth->user()->articles->contains('id', $index) ||
+            $this->auth->user()->articles->contains('slug', $index)
+        )
         {
-            if ($this->auth->user()->isAdmin())
-            {
-                return $next($request);
-            }
+            return $next($request);
         }
 
-        return response('Not allowed.', 401);
+        return response('Not allowed', 401);
 	}
 
 }
