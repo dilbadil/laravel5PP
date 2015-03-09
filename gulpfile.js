@@ -22,7 +22,8 @@ elixir(function(mix) {
     mix.styles([
         'template.css',
         'app.css',
-        '../../resources/css/libs/select2.min.css'
+        '../../resources/css/libs/select2.min.css',
+        '../../resources/css/libs/highlight/styles/default.css'
     ], 'public/output/styles.css', 'public/css');
 
     // mix scripts
@@ -31,6 +32,7 @@ elixir(function(mix) {
         '../../bower_components/bootstrap/dist/js/bootstrap.min.js',
         '../../bower_components/angular/angular.js',
         '../../resources/js/libs/select2.min.js',
+        '../../resources/js/libs/highlight.pack.js',
         'main.js',
     ], 'public/output/scripts.js', 'public/js');
 

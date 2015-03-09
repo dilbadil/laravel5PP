@@ -16,7 +16,7 @@
             on <b>{! $article->user->created_at->format('D, M Y H:i') !}</b>
         </p>
         <div class="body">
-            {! $article->body !}
+            {!! $article->body !!}
         </div>
     </article>
 

@@ -12,9 +12,8 @@
 
     @section ('css')
         <link href="{! asset('output/styles.css') !}" rel="stylesheet">
-
         <!-- Fonts -->
-        <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+        <!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
         <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0&#45;beta.3/css/select2.min.css" rel="stylesheet" /> -->
 
 
@@ -30,12 +29,12 @@
     @include ('partials.navbar')
 
     <div class="container">
-        @include('partials.flash')
+        @include ('partials.flash')
 
-        @yield('content')
+        @yield ('content')
     </div>
 
-    @section('script')                                                                                                                                                                        
+    @section ('script')                                                                                                                                                                        
         <!-- Scripts -->
         <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
         <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/twitter&#45;bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
@@ -45,7 +44,7 @@
     @show
 
     <footer>                                                                                                                                                                                  
-        @section('footer')                                                                                                                                                                    
+        @section ('footer')                                                                                                                                                                    
             <p>Powered by <a href="http://laravel.com" target="_blank">Laravel</a>. Copyright &copy; Dilbadil Inc</p>                                                                   
         @show                                                                                                                                                                                 
     </footer>                                                                                                                                                                                 
