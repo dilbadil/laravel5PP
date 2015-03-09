@@ -22,7 +22,7 @@ Route::resource('tags', 'TagsController');
 
 // Profile
 Route::resource('profile', 'ProfileController'
-    , ['only' => ['index', 'edit', 'update']]);
+    , ['only' => ['index', 'show', 'edit', 'update']]);
 
 // Admin
 Route::get('dashboard', 'DashboardController@index');

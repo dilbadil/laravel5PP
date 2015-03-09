@@ -26,6 +26,8 @@ class ProfileController extends Controller {
     public function __construct(Guard $auth)
     {
         $this->auth = $auth;
+        $this->middleware('auth', ['except' => 'show']);
+        $this->middleware('owner.profile', ['only' => 'edit', 'update']);
     }
 
 	/**
@@ -39,6 +41,21 @@ class ProfileController extends Controller {
 
 		return view('profile.index', compact('user'));
 	}
+
+    /**
+     * Display detail of the profile.
+     *
+     * @param string $username
+     * @return Response
+     */
+    public function show($username)
+    {
+        $user = $this->dispatch(
+            new ShowAnUser($username) 
+        );
+
+        return view('profile.index', compact('user'));
+    }
 
 	/**
 	 * Show the form for editing the specified resource.

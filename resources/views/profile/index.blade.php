@@ -28,7 +28,7 @@
         @endforelse
     </ul>
 
-    @if (Auth::check())
+    @if (Auth::check() && $user->id == $currentUser->id)
         <hr/> 
         <div class="form-group">          
             <a class="btn btn-primary" href="{! route('profile.edit', [$user->username]) !}">edit</a>
