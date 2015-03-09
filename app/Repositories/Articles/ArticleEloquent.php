@@ -99,6 +99,7 @@ class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInt
         $article = $this->article->findOrFail($articleId);
 
         $input['slug'] = $article->generateSlug($input['slug']);
+        $input['excerpt'] = $article->generateExcerpt();
 
         $article->update($input);
 
@@ -121,6 +122,7 @@ class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInt
     public function publish(User $user, $input)
     {
         $article = $user->articles()->create($input);
+        $article->excerpt = $article->generateExcerpt();
         $article->slug = $article->generateSlug();
         $article->save();
 

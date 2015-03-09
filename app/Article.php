@@ -16,6 +16,7 @@ class Article extends Model {
         'title',
         'body',
         'published_at',
+        'excerpt',
         'slug',
     ];
 
@@ -120,6 +121,17 @@ class Article extends Model {
         }
 
         return $slug;
+    }
+
+    /**
+     * Generate excerpt for the article
+     *
+     * @param int $limit
+     * @return string
+     */
+    public function generateExcerpt($limit = 128)
+    {
+        return Str::limit($this->body, $limit);
     }
 
 }

@@ -15,7 +15,8 @@
                     Posted by <a href="{! route('users.show', [$article->user->username]) !}">{! $article->user->fullname !}</a>
                     on {! $article->user->created_at->format('D, M Y H:i') !}
                 </p>
-                <p>{! $article->body !}</p>
+                <p>{! $article->excerpt !}</p>
+                <p><a href="{! route('articles.show', [$article->slug]) !}">read more</a></p>
             </li>
         @endforeach
     </ul>
