@@ -24,5 +24,18 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('role_list', 'Roles:') !!}
+    {!! Form::select('role_list[]', $roles, null, ['id' => 'role_list', 'class' => 'form-control', 'multiple']) !!}
+</div>
+
+<div class="form-group">
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 </div>
+
+@section ('footer')
+    <script>
+    $('#role_list').select2({
+        placeholder: 'Choose roles'
+    });
+    </script>
+@endsection

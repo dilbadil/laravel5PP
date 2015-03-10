@@ -19,12 +19,21 @@
 
     <hr/>
 
-    <h4>{! $user->fullname !}'s' articles</h4>
+    <h4>Articles :</h4>
     <ul>
         @forelse ($user->articles as $article)
             <li><a href="{! route('articles.show', [$article->slug]) !}">{! $article->title !}</a></li>
         @empty
             <p>{! $user->username !} doesn't have articles </p>
+        @endforelse
+    </ul>
+
+    <h4>Groups :</h4>
+    <ul>
+        @forelse ($user->roles as $role)
+            <li><a href="#">{! $role->name !}</a></li>
+        @empty
+            <p>{! $user->username !} doesn't have groups</p>
         @endforelse
     </ul>
 

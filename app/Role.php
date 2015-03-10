@@ -10,6 +10,13 @@ class Role extends Model {
     protected $fillable = ['name'];
 
     /**
+     * List of admin, include super admin
+     *
+     * @var array
+     */
+    public static $adminIds = [1, 3];
+
+    /**
      * A role can have many users.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

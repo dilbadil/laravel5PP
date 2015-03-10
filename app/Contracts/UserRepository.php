@@ -37,7 +37,7 @@ interface UserRepository {
      * Update the user.
      *
      * @param int $userId
-     * @param array $data
+     * @param array $user
      * @return return \App\User
      */
     public function update($userId, array $user);

@@ -52,7 +52,7 @@ class UserEloquent extends EloquentRepository implements UserRepositoryInterface
      */
     public function getByUsername($username)
     {
-        return $this->user->with('articles')
+        return $this->user->with(['articles', 'roles'])
             ->where('username', $username)
             ->firstOrFail();
     }

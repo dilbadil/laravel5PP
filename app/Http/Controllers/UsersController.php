@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Contracts\RoleRepository;
 
 use App\Commands\Users\ShowAllUser;
 use App\Commands\Users\ShowAnUser;
@@ -39,11 +40,14 @@ class UsersController extends Controller {
 	/**
 	 * Show the form for creating a new user.
 	 *
+     * @param RoleRepository $roleRepo
 	 * @return Response
 	 */
-	public function create()
+	public function create(RoleRepository $roleRepo)
 	{
-		return view('users.create');
+        $roles = $roleRepo->getLIsts();
+
+		return view('users.create', compact('roles'));
 	}
 
 	/**

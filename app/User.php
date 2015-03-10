@@ -99,10 +99,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $toSnake = function($value) {
             if (is_array($value))
             {
-                $value = Str::snake($value['name']);
+                $value = Str::snake(str_replace(' ', '_', $value['name']));
             }
 
-            return Str::snake(str_replace(' ', '', $value));
+            return Str::snake(str_replace(' ', '_', $value));
         };
 
         $allRoles = Collection::make(\App\Role::lists('name', 'id'))->map($toSnake);

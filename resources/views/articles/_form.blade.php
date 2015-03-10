@@ -33,8 +33,8 @@
     <script>
 
         $('#tag_list').select2({
-            placeholder: 'Choose a tag',
-            tags: true
+            placeholder: 'Choose tags',
+            tags: false
         });
 
     </script>

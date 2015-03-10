@@ -48,6 +48,12 @@ class AppServiceProvider extends ServiceProvider {
             'App\Contracts\TagRepository',
             'App\Repositories\Tags\TagEloquent'
         );
+
+        // RoleRepository
+        $this->app->bind(
+            'App\Contracts\RoleRepository',
+            'App\Repositories\Roles\RoleEloquent'
+        );
 	}
 
 }

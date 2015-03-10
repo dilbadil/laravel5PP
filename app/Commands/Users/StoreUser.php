@@ -12,7 +12,7 @@ class StoreUser extends Command {
 	/**
 	 * Create a new command instance.
 	 *
-	 * @param store $user
+	 * @param array $user
 	 * @return void
 	 */
 	public function __construct(array $user)

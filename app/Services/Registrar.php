@@ -33,6 +33,11 @@ class Registrar implements RegistrarContract {
 			'password' => bcrypt($data['password']),
 		]);
 
+        if (isset($data['role_list']))
+        {
+            $user->roles()->attach($data['role_list']);
+        }
+
         // Fire an event that user was registered.
         event(new UserWasRegistered($user));
 
