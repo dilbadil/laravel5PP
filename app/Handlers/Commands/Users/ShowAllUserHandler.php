@@ -36,8 +36,6 @@ class ShowAllUserHandler {
 	 */
 	public function handle(ShowAllUser $command)
 	{
-		$this->command = $command;
-
         return $this->userRepo->getAll();
 	}
 

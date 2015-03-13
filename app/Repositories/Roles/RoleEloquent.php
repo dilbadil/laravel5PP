@@ -28,16 +28,27 @@ class RoleEloquent extends EloquentRepository implements RoleRepository {
     }
 
     /**
-     * Get lists array id name key value pair from roles table.
+     * Get all lists from the roles table.
      *
      * @return array
      */
-    public function getLIsts()
+    public function getAllLists()
+    {
+        return $this->role->lists('name', 'id');
+    }
+
+    /**
+     * Get lists array id name key value pair from roles table.
+     * if not admin it return except admin ids.
+     *
+     * @return array
+     */
+    public function getListsWithPermission()
     {
         $roles = $this->role->lists('name', 'id');
         $adminIds = Role::$adminIds;
 
-        if (! $this->auth->user()->isSuperAdmin())
+        if ($this->auth->user()->isNotSuperAdmin())
         {
             $roles = array_flip(
                 array_diff(array_flip($roles), $adminIds)

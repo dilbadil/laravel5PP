@@ -2,7 +2,7 @@
 
 use App\Commands\Users\StoreUser;
 use App\Contracts\UserRepository;
-use App\User;
+use App\Role;
 use Illuminate\Contracts\Auth\Guard;
 
 use Illuminate\Queue\InteractsWithQueue;
@@ -39,14 +39,13 @@ class StoreUserHandler {
 	 */
 	public function handle(StoreUser $command)
 	{
-        $adminIds = User::$adminIds;
-
-        if (isset($command->user['role_list']) && ! $this->auth->user()->isSuperAdmin())
+        // Role lists handler.
+        if (isset($command->user['role_list']) && $this->auth->user()->isNotSuperAdmin())
         {
-            $command->user['role_list'] = array_diff($command->user['role_list'], $adminIds);
+            $command->user['role_list'] = array_diff($command->user['role_list'], Role::$adminIds);
         }
 
-        return $this->userRepo->store($command->user);
+        return $this->userRepo->add($command->user);
 	}
 
 }

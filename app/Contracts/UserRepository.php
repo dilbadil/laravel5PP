@@ -10,15 +10,15 @@ interface UserRepository {
     public function getAll();
 
     /**
-     * Store the user.
+     * Add an user.
      *
      * @param array $user
      * @return \App\User
      */
-    public function store(array $user);
+    public function add(array $user);
 
     /**
-     * Get by their id.
+     * Get user by their id.
      *
      * @param int $id
      * @return \App\User
@@ -26,7 +26,7 @@ interface UserRepository {
     public function getById($id);
 
     /**
-     * Get by their username.
+     * Get user by their username.
      *
      * @param string $username
      * @return \App\User
@@ -41,4 +41,13 @@ interface UserRepository {
      * @return return \App\User
      */
     public function update($userId, array $user);
+
+    /**
+     * Remove an user by their id.
+     *
+     * @param int $modelId
+     * @return \App\User
+     */
+    public function remove($modelId);
+
 }

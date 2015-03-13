@@ -1,7 +1,7 @@
 <?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use App\Role;
+use App\User;
 use Illuminate\Support\Collection;
 
 class UserRequest extends Request {
@@ -30,7 +30,7 @@ class UserRequest extends Request {
 	{
         $segments = Collection::make($this->segments());
 
-        $rules = Role::$rules;
+        $rules = User::$rules;
 
         if (in_array($this->method, $this->updateMethods))
         {

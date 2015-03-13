@@ -25,7 +25,7 @@
 
 <div class="form-group">
     {!! Form::label('role_list', 'Roles:') !!}
-    {!! Form::select('role_list[]', $roles, null, ['id' => 'role_list', 'class' => 'form-control', 'multiple']) !!}
+    {!! Form::select('role_list[]', $roles, $user->roles->lists('id'), ['id' => 'role_list', 'class' => 'form-control', 'multiple']) !!}
 </div>
 
 <div class="form-group">
@@ -35,7 +35,8 @@
 @section ('footer')
     <script>
     $('#role_list').select2({
-        placeholder: 'Choose roles'
+        placeholder: 'Choose roles',
+        tags: false
     });
     </script>
 @endsection

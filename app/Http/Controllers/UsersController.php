@@ -18,11 +18,13 @@ class UsersController extends Controller {
     /**
      * Instance of controller.
      *
+     * @param RoleRepository $roleRepo
      * @return void
      */
-    public function __construct()
+    public function __construct(RoleRepository $roleRepo)
     {
         $this->middleware('admin');
+        $this->roleRepo = $roleRepo;
     }
 
 	/**
@@ -43,9 +45,9 @@ class UsersController extends Controller {
      * @param RoleRepository $roleRepo
 	 * @return Response
 	 */
-	public function create(RoleRepository $roleRepo)
+	public function create()
 	{
-        $roles = $roleRepo->getLIsts();
+        $roles = $this->roleRepo->getListsWithPermission();
 
 		return view('users.create', compact('roles'));
 	}
@@ -73,11 +75,11 @@ class UsersController extends Controller {
 	 */
 	public function show($username)
 	{
-        $user = $this->dispatch(
+        $data = $this->dispatch(
             new ShowAnUser($username) 
         );
 
-		return view('users.show', compact('user'));
+		return view('users.show', $data);
 	}
 
 	/**
@@ -88,18 +90,18 @@ class UsersController extends Controller {
 	 */
 	public function edit($username)
 	{
-        $user = $this->dispatch(
+        $data = $this->dispatch(
             new ShowAnUser($username)
         );
 
-		return view('users.edit', compact('user'));
+		return view('users.edit', $data);
 	}
 
 	/**
 	 * Update the specified user in storage.
 	 *
-	 * @param  int  $userId 
 	 * @param  UserRequest  $request
+	 * @param  int  $userId 
 	 * @return Response
 	 */
 	public function update(UserRequest $request, $userId)

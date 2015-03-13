@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRolesTable extends Migration {
+class AddTimestampsToRoleUserTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,9 @@ class CreateRolesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('roles', function(Blueprint $table)
-		{
-			$table->increments('id');
+		Schema::table('role_user', function(Blueprint $table) {
 			$table->timestamps();
-		});
+        });
 	}
 
 	/**
@@ -26,7 +24,9 @@ class CreateRolesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('roles');
+		Schema::table('role_user', function(Blueprint $table) {
+            $table->dropColumn(['created_at', 'updated_at']);
+        });
 	}
 
 }

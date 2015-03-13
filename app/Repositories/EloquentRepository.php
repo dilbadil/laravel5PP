@@ -21,36 +21,60 @@ abstract class EloquentRepository
     }
 
     /**
-     * Get all data model.
+     * Make eager loader.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param array|string $with
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function getAll()
+    public function make($with = array())
     {
-        return $this->model->all();
+        return $this->model->with($with);
     }
 
     /**
-     * Find model by their id.
+     * Get all data model with optional eager load.
      *
-     * @param int $id
+     * @param array|string $with
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAll($with = array())
+    {
+        return $this->make($with)->get();
+    }
+
+    /**
+     * Get model by their id.
+     *
+     * @param int $modelId
+     * @param array|string $with
      * @return Model
      */
-    protected function findById($id)
+    public function getById($modelId, $with = array())
     {
-        return $this->model->findOrFail($id);
+        return $this->make($with)->findOrFail($modelId);
+    }
+
+    /**
+     * Add to database.
+     *
+     * @param array $data
+     * @return Model
+     */
+    public function add(array $data)
+    {
+        return $this->model->create($data);
     }
 
     /**
      * Update the model by their id.
      *
-     * @param int $id
+     * @param int $modelId
      * @param array $data
      * @return Model
      */
-    public function update($id, array $data)
+    public function update($modelId, array $data)
     {
-        $model = $this->findById($id);
+        $model = $this->getById($modelId);
         $model->update($data);
 
         return $model;
@@ -59,12 +83,12 @@ abstract class EloquentRepository
     /**
      * Delete the model by id.
      *
-     * @param int $id
+     * @param int $modelId
      * @return Model
      */
-    public function delete($id)
+    public function remove($modelId)
     {
-        $model = $this->findById($id);
+        $model = $this->getById($modelId);
         $model->delete();
 
         return $model;

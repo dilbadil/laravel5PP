@@ -30,7 +30,7 @@ class DeleteAnUserHandler {
 	 */
 	public function handle(DeleteAnUser $command)
 	{
-		return $this->userRepo->delete($command->userId);
+		return $this->userRepo->remove($command->userId);
 	}
 
 }
