@@ -66,11 +66,12 @@ class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInt
      * Get one published article by their id.
      *
      * @param int $articleId
+     * @param array|string $with
      * @return Article
      */
-    public function getPublishedById($articleId)
+    public function getPublishedById($articleId, $with = array())
     {
-        return $this->article->with('user')
+        return $this->make($with)
             ->published()
             ->findOrFail($articleId);
     }
@@ -79,11 +80,12 @@ class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInt
      * Get one published article by their slug.
      *
      * @param int $articleSlug
+     * @param array|string $with
      * @return Article
      */
-    public function getPublishedBySlug($articleSlug)
+    public function getPublishedBySlug($articleSlug, $with = array())
     {
-        return $this->article->with('user')
+        return $this->make($with)
             ->published()
             ->whereSlug($articleSlug)
             ->first();

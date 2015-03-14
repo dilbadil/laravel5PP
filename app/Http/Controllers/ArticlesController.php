@@ -3,16 +3,15 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Article;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\HttpResponse;
-use App\Tag;
 
 use App\Commands\Articles\ShowAllArticles;
 use App\Commands\Articles\CreateArticle;
 use App\Commands\Articles\ShowAnArticle;
 use App\Commands\Articles\PublishArticle;
 use App\Commands\Articles\UpdateArticle;
+use App\Commands\Articles\RemoveArticle;
 
 class ArticlesController extends Controller {
 
@@ -82,10 +81,9 @@ class ArticlesController extends Controller {
 	 * Show the form for editing the specified article.
 	 *
 	 * @param  string  $articleSlug
-	 * @param  Tag  $tag
 	 * @return Response
 	 */
-	public function edit($articleSlug, Tag $tag)
+	public function edit($articleSlug)
 	{
         $data = $this->dispatch(new ShowAnArticle($articleSlug));
 
@@ -115,7 +113,7 @@ class ArticlesController extends Controller {
 	 */
 	public function destroy($articleId)
 	{
-		$article = $this->articleRepo->delete($articleId);
+        $article = $this->dispatch(new RemoveArticle($articleId));
 
         return redirectImportant('articles', 'Article has been deleted');
 	}

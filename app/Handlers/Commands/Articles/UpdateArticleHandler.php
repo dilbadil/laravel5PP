@@ -13,21 +13,15 @@ class UpdateArticleHandler {
      */
     protected $articleRepo;
 
-    /**
-     * @var Article
-     */
-    protected $article;
-
 	/**
 	 * Create the command handler.
 	 *
      * @param ArticleRepository $articleRepo
 	 * @return void
 	 */
-	public function __construct(ArticleRepository $articleRepo, Article $article)
+	public function __construct(ArticleRepository $articleRepo)
 	{
 		$this->articleRepo = $articleRepo;
-        $this->article = $article;
 	}
 
 	/**
