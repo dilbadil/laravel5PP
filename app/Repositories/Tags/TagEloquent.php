@@ -35,6 +35,29 @@ class TagEloquent extends EloquentRepository implements TagRepositoryInterface {
     }
 
     /**
+     * Get tag by their name.
+     *
+     * @param string $name
+     * @return Tag
+     */
+    public function getByName($name)
+    {
+        return $this->tag->whereName($name)->firstOrFail();
+    }
+
+    /**
+     * Get paginated articles that has been published by their tag name.
+     *
+     * @param string $name
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getArticlesByTagName($name, $limit = 4)
+    {
+       return $this->getByName($name)->articles()->published()->simplePaginate($limit); 
+    }
+
+    /**
      * Release ids of input and create one if not exist.
      *
      * @example [1, 2, 'new tag'] -> [1, 2, 3] | 3 is id of new tag

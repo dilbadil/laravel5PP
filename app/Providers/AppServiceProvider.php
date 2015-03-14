@@ -54,6 +54,12 @@ class AppServiceProvider extends ServiceProvider {
             'App\Contracts\RoleRepository',
             'App\Repositories\Roles\RoleEloquent'
         );
+
+        // TaskRepository
+        $this->app->bind(
+            'App\Contracts\TaskRepository',
+            'App\Repositories\Tasks\TaskEloquent'
+        );
 	}
 
 }

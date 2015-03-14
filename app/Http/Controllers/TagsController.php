@@ -3,20 +3,31 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Tag;
+use App\Contracts\TagRepository;
 
 use Illuminate\Http\Request;
 
 class TagsController extends Controller {
 
     /**
+     * Instance of the controller.
+     *
+     * @var TagRepository $tagRepo
+     * @return void
+     */
+    public function __construct(TagRepository $tagRepo)
+    {
+        $this->tagRepo = $tagRepo;
+    }
+
+    /**
      * Show all tags.
      *
-     * @param Tag $tag
      * @return Response
      */
-    public function index(Tag $tag)
+    public function index()
     {
-        $tags = $tag->all();
+        $tags = $this->tagRepo->getAll();
 
         return view('tags.index', compact('tags'));
     }
@@ -24,12 +35,12 @@ class TagsController extends Controller {
     /**
      * Show articles in the specified tag.
      *
-     * @param Tag $tag
+     * @param string $tagName
      * @return Response
      */
-    public function show(Tag $tag)
+    public function show($tagName)
     {
-       $articles = $tag->articles()->published()->simplePaginate(4); 
+       $articles = $this->tagRepo->getArticlesByTagName($tagName);
 
        return view('articles.index', compact('articles'));
     }

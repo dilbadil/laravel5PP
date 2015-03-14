@@ -3,25 +3,27 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Task;
+use App\Contracts\TaskRepository;
+use App\Http\Requests\TaskRequest;
 
 use Illuminate\Http\Request;
 
 class TasksController extends Controller {
 
     /**
-     * @var Task
+     * @var TaskRepository
      */
-    protected $task;
+    protected $taskRepo;
 
     /**
-     * Instance TaskController.
+     * Instance of the controller.
      *
-     * @param Task $task
-     * @return Response
+     * @param TaskRepository $taskRepo
+     * @return void
      */
-    public function __construct(Task $task)
+    public function __construct(TaskRepository $taskRepo)
     {
-        $this->task = $task;
+        $this->taskRepo = $taskRepo;
     }
 
 	/**
@@ -31,71 +33,66 @@ class TasksController extends Controller {
 	 */
 	public function index()
 	{
-        return $this->task->all(); 
-	}
-
-	/**
-	 * Show the form for creating a new task.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
+        return $this->taskRepo->getAll(); 
 	}
 
 	/**
 	 * Store a newly created task in storage.
 	 *
+     * @param TaskRequest $request
 	 * @return Response
 	 */
-	public function store()
+	public function store(TaskRequest $request)
 	{
-		//
+		$store = $this->taskRepo->add($request->all());
+
+        if ($store) return ['status' => true];
+
+        return ['status' => false];
 	}
 
 	/**
 	 * Display the specified task.
 	 *
-	 * @param  int  $id
+	 * @param  int  $taskId
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($taskId)
 	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified task.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
+		return $this->taskRepo->getById($taskId);
 	}
 
 	/**
 	 * Update the specified task in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int  $taskId
+     * @param TaskRequest $request
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($taskId, TaskRequest $request)
 	{
-		//
+		if ($this->taskRepo->update($taskId, $request->all()))
+        {
+            return ['status' => true];
+        }
+
+        return ['status' => false];
 	}
 
 	/**
 	 * Remove the specified task from storage.
 	 *
-	 * @param  int  $id
+	 * @param  int  $taskId
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($taskId)
 	{
-		//
+		if ($this->taskRepo->remove($taskId))
+        {
+            return ['status' => true];
+        }
+
+        return ['status' => false];
 	}
 
 }

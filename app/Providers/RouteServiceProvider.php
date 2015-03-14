@@ -35,10 +35,10 @@ class RouteServiceProvider extends ServiceProvider {
         // });
 
         // bind tags
-        $router->bind('tags', function($name)
-        {
-            return \App\Tag::where('name', $name)->firstOrFail();
-        });
+        // $router->bind('tags', function($name)
+        // {
+        //     return \App\Tag::where('name', $name)->firstOrFail();
+        // });
 
         // set blade content
         $this->setBladeContent();

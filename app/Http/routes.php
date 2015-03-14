@@ -26,5 +26,5 @@ Route::resource('profile', 'ProfileController'
 
 // Admin
 Route::get('dashboard', 'DashboardController@index');
-Route::get('tasks', 'TasksController@index');
+Route::resource('tasks', 'TasksController');
 Route::resource('users', 'UsersController');

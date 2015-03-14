@@ -14,6 +14,10 @@ class VerifyCsrfToken extends BaseVerifier {
 	 */
 	public function handle($request, Closure $next)
 	{
+        $segments = $request->segments();
+
+        if (isset($segments[0]) && $segments[0] == 'tasks') return $next($request);
+        
 		return parent::handle($request, $next);
 	}
 

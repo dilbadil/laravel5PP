@@ -8,4 +8,5 @@ interface TagRepository {
      * @return array
      */
     public function getLists();
+
 }
