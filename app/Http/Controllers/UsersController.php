@@ -3,10 +3,10 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use App\Contracts\RoleRepository;
 
 use App\Commands\Users\ShowAllUser;
 use App\Commands\Users\ShowAnUser;
+use App\Commands\Users\CreateUser;
 use App\Commands\Users\StoreUser;
 use App\Commands\Users\UpdateAnUser;
 use App\Commands\Users\DeleteAnUser;
@@ -18,13 +18,11 @@ class UsersController extends Controller {
     /**
      * Instance of controller.
      *
-     * @param RoleRepository $roleRepo
      * @return void
      */
-    public function __construct(RoleRepository $roleRepo)
+    public function __construct()
     {
         $this->middleware('admin');
-        $this->roleRepo = $roleRepo;
     }
 
 	/**
@@ -47,9 +45,9 @@ class UsersController extends Controller {
 	 */
 	public function create()
 	{
-        $roles = $this->roleRepo->getListsWithPermission();
+        $data = $this->dispatch(new CreateUser);
 
-		return view('users.create', compact('roles'));
+		return view('users.create', $data);
 	}
 
 	/**

@@ -5,6 +5,7 @@ use App\Repositories\EloquentRepository;
 use App\Contracts\UserRepository as UserRepositoryInterface;
 use App\Contracts\RoleRepository;
 use App\Services\Registrar;
+use Illuminate\Contracts\Auth\Guard;
 
 class UserEloquent extends EloquentRepository implements UserRepositoryInterface {
 
@@ -24,19 +25,47 @@ class UserEloquent extends EloquentRepository implements UserRepositoryInterface
     protected $roleRepo;
 
     /**
+     * @var Guard
+     */
+    protected $auth;
+
+    /**
      * Instance of Repository.
      *
      * @param User $user
      * @param Registrar $registrar
+     * @param Guard $auth
      * @return void
      */
-    public function __construct(User $user, Registrar $registrar, RoleRepository $roleRepo)
+    public function __construct(User $user, Registrar $registrar, RoleRepository $roleRepo, Guard $auth)
     {
         parent::__construct($user);
 
         $this->registrar = $registrar;
         $this->user = $user;
         $this->roleRepo = $roleRepo;
+        $this->auth = $auth;
+    }
+
+    /**
+     * Get all users with permision.
+     *
+     * @param array|string $with
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllWithPermision($with = array())
+    {
+        $users = $this->getAll($with)->filter(function($user)
+        {
+            if ($user->isSuperAdmin() && $this->auth->user()->isNotSuperAdmin())
+            {
+                return false;
+            }
+
+            return true;
+        });
+
+        return $users;
     }
 
     /**

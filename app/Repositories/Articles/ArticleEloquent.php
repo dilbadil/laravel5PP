@@ -36,11 +36,12 @@ class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInt
     /**
      * Get all articles that has been published.
      *
+     * @param array|string $with
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getAllPublished()
+    public function getAllPublished($with = array())
     {
-        return $this->article->with('user')
+        return $this->make($with)
             ->latest()
             ->published()
             ->get();
@@ -49,12 +50,13 @@ class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInt
     /**
      * Get paginated articles that has been published.
      *
+     * @param array|string $with
      * @param int $limit
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getPublishedPaginated($limit = 4)
+    public function getPublishedPaginated($with = array(), $limit = 4)
     {
-        return $this->article->with('user')
+        return $this->make($with)
             ->latest()
             ->published()
             ->simplePaginate($limit);

@@ -7,29 +7,24 @@ use App\Article;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\HttpResponse;
 use App\Tag;
-use App\Contracts\ArticleRepository;
 
+use App\Commands\Articles\ShowAllArticles;
 use App\Commands\Articles\CreateArticle;
+use App\Commands\Articles\ShowAnArticle;
 use App\Commands\Articles\PublishArticle;
 use App\Commands\Articles\UpdateArticle;
 
 class ArticlesController extends Controller {
 
     /**
-     * @var ArticleRepository
-     */
-    protected $articleRepo;
-
-    /**
      * Create articles controller instance 
      *
-     * @param ArticleRepository $articleRepo
+     * @return void
      */
-    public function __construct(ArticleRepository $articleRepo)
+    public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
         $this->middleware('owner.article', ['only' => ['edit', 'update', 'destroy']]);
-        $this->articleRepo = $articleRepo;
     }
 
 	/**
@@ -39,9 +34,9 @@ class ArticlesController extends Controller {
 	 */
 	public function index()
 	{
-        $articles = $this->articleRepo->getPublishedPaginated();
+        $data = $this->dispatch(new ShowAllArticles);
 
-        return view('articles.index', compact('articles'));
+        return view('articles.index', $data);
 	}
 
 	/**
@@ -78,9 +73,9 @@ class ArticlesController extends Controller {
 	 */
 	public function show($articleSlug)
 	{
-        $article = $this->articleRepo->getPublishedBySlug($articleSlug);
+        $data = $this->dispatch(new ShowAnArticle($articleSlug));
 
-        return view('articles.show', compact('article'));
+        return view('articles.show', $data);
 	}
 
 	/**
@@ -92,10 +87,9 @@ class ArticlesController extends Controller {
 	 */
 	public function edit($articleSlug, Tag $tag)
 	{
-        $article = $this->articleRepo->getPublishedBySlug($articleSlug);
-        $tags = $tag->lists('name', 'id');
+        $data = $this->dispatch(new ShowAnArticle($articleSlug));
 
-        return view('articles.edit', compact('article', 'tags'));
+        return view('articles.edit', $data);
 	}
 
 	/**

@@ -21,6 +21,16 @@ abstract class EloquentRepository
     }
 
     /**
+     * Get instance of Model
+     *
+     * @return Model
+     */
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    /**
      * Make eager loader.
      *
      * @param array|string $with
