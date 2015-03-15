@@ -11,4 +11,14 @@ class Task extends Model {
 	 */
     protected $fillable = ['item', 'completed'];
 
+    /**
+     * An task is owned by a user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
 }

@@ -59,6 +59,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * A user can have many tasks.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tasks()
+    {
+        return $this->hasMany('App\Task');
+    }
+
+    /**
      * A user can have many roles.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

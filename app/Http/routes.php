@@ -1,9 +1,9 @@
 <?php
 
 // Pages
-Route::get('/', 'ArticlesController@index');
-Route::get('home', 'ArticlesController@index');
-Route::get('about', [
+get('/', 'ArticlesController@index');
+get('home', 'ArticlesController@index');
+get('about', [
     'as' => 'about_path',
     'uses' => 'PagesController@about',
 ]);
@@ -25,6 +25,6 @@ Route::resource('profile', 'ProfileController'
     , ['only' => ['index', 'show', 'edit', 'update']]);
 
 // Admin
-Route::get('dashboard', 'DashboardController@index');
+get('dashboard', 'DashboardController@index');
 Route::resource('tasks', 'TasksController');
 Route::resource('users', 'UsersController');
