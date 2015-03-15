@@ -1,7 +1,7 @@
 <?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Collection;
 
 class UserRequest extends Request {

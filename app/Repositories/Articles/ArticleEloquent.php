@@ -2,8 +2,8 @@
 
 use App\Contracts\ArticleRepository as ArticleRepositoryInterface;
 use App\Repositories\EloquentRepository;
-use App\Article;
-use App\User;
+use App\Models\Article;
+use App\Models\User;
 use App\Contracts\TagRepository;
 
 class ArticleEloquent extends EloquentRepository implements ArticleRepositoryInterface {

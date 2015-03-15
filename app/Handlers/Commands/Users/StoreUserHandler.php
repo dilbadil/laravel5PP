@@ -2,7 +2,7 @@
 
 use App\Commands\Users\StoreUser;
 use App\Contracts\UserRepository;
-use App\Role;
+use App\Models\Role;
 use Illuminate\Contracts\Auth\Guard;
 
 use Illuminate\Queue\InteractsWithQueue;

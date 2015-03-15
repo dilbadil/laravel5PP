@@ -4,9 +4,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 
 use Faker\Factory as Faker;
-use App\Article;
-use App\User;
-use App\Tag;
+use App\Models\Article;
+use App\Models\User;
+use App\Models\Tag;
 
 use Laracasts\TestDummy\Factory as TestDummy;
 
@@ -14,7 +14,7 @@ class ArticlesTableSeeder extends Seeder {
 
     public function run()
     {
-        // TestDummy::times(20)->create('App\Article');
+        // TestDummy::times(20)->create('App\Models\Article');
 
         $faker = Faker::create();
 

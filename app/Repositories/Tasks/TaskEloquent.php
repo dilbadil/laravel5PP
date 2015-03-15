@@ -2,7 +2,7 @@
 
 use App\Repositories\EloquentRepository;
 use App\Contracts\TaskRepository as TaskRepositoryInterface;
-use App\Task;
+use App\Models\Task;
 
 class TaskEloquent extends EloquentRepository implements TaskRepositoryInterface {
 

@@ -1,6 +1,6 @@
 <?php namespace App\Repositories\Tags;
 
-use App\Tag;
+use App\Models\Tag;
 use App\Repositories\EloquentRepository;
 use App\Contracts\TagRepository as TagRepositoryInterface;
 

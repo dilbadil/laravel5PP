@@ -2,7 +2,6 @@
 
 use App\Commands\Articles\UpdateArticle;
 use App\Contracts\ArticleRepository;
-use App\Article;
 
 use Illuminate\Queue\InteractsWithQueue;
 

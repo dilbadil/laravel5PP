@@ -26,18 +26,18 @@ class RouteServiceProvider extends ServiceProvider {
 		parent::boot($router);
 
         // bind user
-		// $router->model('users', 'App\User');
+		// $router->model('users', 'App\Models\User');
         
         // bind article
         // $router->bind('articles', function($id)
         // {
-        //     return \App\Article::with('user')->published()->findOrFail($id);
+        //     return \App\Models\Article::with('user')->published()->findOrFail($id);
         // });
 
         // bind tags
         // $router->bind('tags', function($name)
         // {
-        //     return \App\Tag::where('name', $name)->firstOrFail();
+        //     return \App\Models\Tag::where('name', $name)->firstOrFail();
         // });
 
         // set blade content

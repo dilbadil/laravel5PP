@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Tag;
 
 // composer require laracasts/testdummy
 use Laracasts\TestDummy\Factory as TestDummy;
@@ -24,7 +25,7 @@ class TagsTableSeeder extends Seeder {
 
         for ($i = 0; $i < 8; $i++) 
         {
-            $user = new App\Tag;
+            $user = new Tag;
             $user->name = $lists[$i];
             $user->save();
         }

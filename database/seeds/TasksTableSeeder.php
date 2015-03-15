@@ -4,8 +4,8 @@ use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
 use Laracasts\TestDummy\Factory as TestDummy;
-use App\User;
-use App\Task;
+use App\Models\User;
+use App\Models\Task;
 
 class TasksTableSeeder extends Seeder {
 

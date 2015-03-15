@@ -2,7 +2,7 @@
 
 use Illuminate\Contracts\View\View;
 use Auth;
-use App\Article;
+use App\Models\Article;
 use Illuminate\Auth\Guard;
 
 class NavigationComposer

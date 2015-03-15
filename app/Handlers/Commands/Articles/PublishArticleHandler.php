@@ -1,7 +1,6 @@
 <?php namespace App\Handlers\Commands\Articles;
 
 use App\Commands\Articles\PublishArticle;
-use App\Tag;
 use App\Contracts\ArticleRepository;
 use App\Contracts\TagRepository;
 

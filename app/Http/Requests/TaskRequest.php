@@ -24,7 +24,6 @@ class TaskRequest extends Request {
 		return [
 			'item' => 'required',
             'completed' => 'required|boolean',
-            'user_id' => 'required|numeric'
 		];
 	}
 

@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -8,7 +8,8 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
-use App\Article;
+use App\Models\Role;
+use App\Models\Article;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -55,7 +56,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function articles()
     {
-        return $this->hasMany('App\Article');
+        return $this->hasMany('App\Models\Article');
     }
 
     /**
@@ -65,7 +66,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function tasks()
     {
-        return $this->hasMany('App\Task');
+        return $this->hasMany('App\Models\Task');
     }
 
     /**
@@ -75,7 +76,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function roles()
     {
-        return $this->belongsToMany('App\Role')->withTimestamps();
+        return $this->belongsToMany('App\Models\Role')->withTimestamps();
     }
 
     /**
@@ -115,7 +116,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return Str::snake(str_replace(' ', '_', $value));
         };
 
-        $allRoles = Collection::make(\App\Role::lists('name', 'id'))->map($toSnake);
+        $allRoles = Collection::make(Role::lists('name', 'id'))->map($toSnake);
         $userRoles = Collection::make($this->roles->toArray())->map($toSnake);
 
         $methodSnaked = str_replace('is_not_', '', $methodSnaked);

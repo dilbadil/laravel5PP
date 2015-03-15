@@ -2,7 +2,7 @@
 
 use App\Repositories\EloquentRepository;
 use App\Contracts\RoleRepository;
-use App\Role;
+use App\Models\Role;
 use Illuminate\Contracts\Auth\Guard;
 
 class RoleEloquent extends EloquentRepository implements RoleRepository {
