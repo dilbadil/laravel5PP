@@ -28,6 +28,15 @@
         @endforelse
     </ul>
 
+    <h4>Groups :</h4>
+    <ul>
+        @forelse ($user->roles as $role)
+            <li><a href="#">{! $role->name !}</a></li>
+        @empty
+            <p>{! $user->username !} doesn't have groups</p>
+        @endforelse
+    </ul>
+
     @if (Auth::check() && $user->id == $currentUser->id)
         <hr/> 
         <div class="form-group">          

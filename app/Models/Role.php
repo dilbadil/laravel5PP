@@ -14,7 +14,7 @@ class Role extends Model {
      *
      * @var array
      */
-    public static $adminIds = [1, 3];
+    public static $adminIds = [1, 2];
 
     /**
      * A role can have many users.

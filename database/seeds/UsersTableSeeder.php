@@ -42,7 +42,7 @@ class UsersTableSeeder extends Seeder {
             'email' => 'super_admin@localhost.com',
             'username' => 'superAdmin',
             'password' => bcrypt('qweasd123'),
-        ])->roles()->attach([2]);
+        ])->roles()->attach([1, 2]);
     }
 
 }

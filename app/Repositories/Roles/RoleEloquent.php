@@ -48,7 +48,7 @@ class RoleEloquent extends EloquentRepository implements RoleRepository {
         $roles = $this->role->lists('name', 'id');
         $adminIds = Role::$adminIds;
 
-        if ($this->auth->user()->isNotSuperAdmin())
+        if ($this->auth->user()->isNotSuperAdmin() || $this->auth->user()->isNotAdmin())
         {
             $roles = array_flip(
                 array_diff(array_flip($roles), $adminIds)

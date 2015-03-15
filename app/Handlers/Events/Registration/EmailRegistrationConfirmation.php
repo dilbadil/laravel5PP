@@ -2,7 +2,7 @@
 
 use App\Events\Registration\UserWasRegistered;
 use App\Contracts\UserRepository;
-use App\Log;
+use App\Models\Log;
 use Mail;
 
 use Illuminate\Queue\InteractsWithQueue;

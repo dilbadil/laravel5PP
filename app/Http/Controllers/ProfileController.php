@@ -50,11 +50,11 @@ class ProfileController extends Controller {
      */
     public function show($username)
     {
-        $user = $this->dispatch(
+        $data = $this->dispatch(
             new ShowAnUser($username) 
         );
 
-        return view('profile.index', compact('user'));
+        return view('profile.index', $data);
     }
 
 	/**
@@ -65,11 +65,11 @@ class ProfileController extends Controller {
 	 */
 	public function edit($username)
 	{
-        $user = $this->dispatch(
+        $data = $this->dispatch(
             new ShowAnUser($username) 
         );
 
-		return view('profile.edit', compact('user'));
+		return view('profile.edit', $data);
 	}
 
 	/**
