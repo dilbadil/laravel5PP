@@ -65,6 +65,38 @@ abstract class EloquentRepository
     }
 
     /**
+     * Get data by the given key and value.
+     *
+     * @param string $key
+     * @param string $value
+     * @param array|string $with
+     * @return Model
+     */
+    public function getBy($key, $value, $with = array())
+    {
+        return $this->make($with)->where($key, $value)->firstOrFail();
+    }
+
+    /**
+     * Get data by the given keys and values.
+     *
+     * @param array $wheres
+     * @param array|string $with
+     * @return Model
+     */
+    public function getByMany(array $wheres, $with = array())
+    {
+        $query = $this->make($with);
+
+        foreach ($wheres as $key => $value)
+        {
+            $query->where($key, $value);
+        }
+
+        return $query->firstOrFail();
+    }
+
+    /**
      * Add to database.
      *
      * @param array $data

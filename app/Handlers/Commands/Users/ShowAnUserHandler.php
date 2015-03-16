@@ -34,7 +34,7 @@ class ShowAnUserHandler {
 	 */
 	public function handle(ShowAnUser $command)
 	{
-		$user = $this->userRepo->getByUsername($command->username);
+		$user = $this->userRepo->getBy('username', $command->username);
 
         $roles = $this->roleRepo->getListsWithPermission();
 

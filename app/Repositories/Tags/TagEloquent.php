@@ -35,17 +35,6 @@ class TagEloquent extends EloquentRepository implements TagRepositoryInterface {
     }
 
     /**
-     * Get tag by their name.
-     *
-     * @param string $name
-     * @return Tag
-     */
-    public function getByName($name)
-    {
-        return $this->tag->whereName($name)->firstOrFail();
-    }
-
-    /**
      * Get paginated articles that has been published by their tag name.
      *
      * @param string $name
@@ -54,7 +43,7 @@ class TagEloquent extends EloquentRepository implements TagRepositoryInterface {
      */
     public function getArticlesByTagName($name, $limit = 4)
     {
-       return $this->getByName($name)->articles()->published()->simplePaginate($limit); 
+       return $this->getBy('name', $name)->articles()->published()->simplePaginate($limit); 
     }
 
     /**

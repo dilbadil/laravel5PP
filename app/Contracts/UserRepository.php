@@ -26,14 +26,6 @@ interface UserRepository {
     public function getById($id);
 
     /**
-     * Get user by their username.
-     *
-     * @param string $username
-     * @return \App\User
-     */
-    public function getByUsername($username);
-
-    /**
      * Update the user.
      *
      * @param int $userId

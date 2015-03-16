@@ -69,20 +69,6 @@ class UserEloquent extends EloquentRepository implements UserRepositoryInterface
     }
 
     /**
-     * Get user by username.
-     *
-     * @param string $username
-     * @param array|string $with
-     * @return User
-     */
-    public function getByUsername($username, $with = array())
-    {
-        return $this->make($with)
-            ->where('username', $username)
-            ->firstOrFail();
-    }
-
-    /**
      * Add user to database.
      *
      * @param array $user
